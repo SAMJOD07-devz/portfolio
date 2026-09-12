@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" data-accent="amber">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saumya Pandya — Spatial Portfolio | CSE Core @ VIT Chennai</title>
+  <meta name="description" content="Saumya Pandya — 2nd Year Computer Science & Engineering (CSE Core) undergraduate at VIT Chennai. Spatial web architectures, algorithms, and full-stack engineering.">
+  <meta name="theme-color" content="#f7f6f2">
+  <meta property="og:title" content="Saumya Pandya — Portfolio | CSE Core @ VIT Chennai">
+  <meta property="og:description" content="2nd Year CSE Core student at VIT Chennai crafting high-performance software and spatial web architectures.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./src/styles/index.css">
+</head>
+<body>
+
+  <!-- Ambient Film Grain Overlay -->
+  <div class="ambient-grain" aria-hidden="true"></div>
+
+  <!-- Zero-Gravity Particle & Physics Background Canvas -->
+  <canvas id="spatial-canvas" aria-hidden="true"></canvas>
+
+
+  <!-- ============================================================
+       CINEMATIC WELCOME ENTRANCE SCREEN
+       ============================================================ -->
+  <aside id="welcome-entrance" class="welcome-entrance" aria-label="Welcome Entrance">
+    <!-- Ambient background highlight aura -->
+    <div class="welcome-bg-glow" aria-hidden="true"></div>
+    <div class="welcome-grain" aria-hidden="true"></div>
+
+    <!-- Quick Skip Action -->
+    <div class="welcome-topbar">
+      <div class="welcome-tag">
+        <span class="welcome-tag-dot"></span>
+        <span>SAUMYA PANDYA // 2026</span>
+      </div>
+      <button id="welcome-skip-btn" class="welcome-skip-btn" title="Skip to Portfolio">
+        <span>Skip</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Central Kinetic Typography Stage -->
+    <div class="welcome-stage">
+      <div class="welcome-type-wrapper">
+        <h2 class="welcome-line welcome-line-1" id="typewriter-line-1"></h2>
+        <h1 class="welcome-line welcome-line-2" id="typewriter-line-2"></h1>
+      </div>
+
+      <!-- Action Prompt (Fades in when typing finishes) -->
+      <div class="welcome-action" id="welcome-action">
+        <button id="welcome-enter-btn" class="welcome-enter-pill">
+          <span>Enter Portfolio</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+        <span class="welcome-hint">Press Enter ↵ or click Enter Portfolio</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Floating Spatial Island Dock Navigation -->
+  <nav class="spatial-nav-dock" aria-label="Main Navigation">
+    <a href="#hero" class="nav-brand">
+      <span class="nav-brand-orb"></span>
+      <span id="nav-brand-name">Portfolio</span>
+    </a>
+
+    <ul class="nav-links">
+      <li class="nav-link-item"><a href="#hero" class="active">Origin</a></li>
+      <li class="nav-link-item"><a href="#work">Work</a></li>
+      <li class="nav-link-item"><a href="#capabilities">Capabilities</a></li>
+      <li class="nav-link-item"><a href="#about">About</a></li>
+      <li class="nav-link-item"><a href="#presence">Ecosystem</a></li>
+      <li class="nav-link-item"><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-dock-actions">
+      <!-- Replay Intro Portal Button -->
+      <button id="replay-intro-btn" class="nav-ctrl-btn" title="Replay Welcome Intro" aria-label="Replay Welcome Intro">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+        </svg>
+      </button>
+
+
+
+      <!-- Accent Color Dropdown Picker -->
+      <div class="accent-dropdown">
+        <button class="nav-ctrl-btn" title="Change Theme Accent" aria-label="Change Theme Accent">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+        </button>
+        <div id="accent-palette-picker" class="accent-palette-picker"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Application Content -->
+  <main class="app-container">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-grid">
+        
+        <!-- Left: Editorial Typography & Magnetic CTAs -->
+        <div class="hero-text-stage">
+          <div class="hero-meta-pill" id="hero-status-badge">
+            <span class="status-dot-radar"></span>
+            <span id="hero-status-text">2nd Year CSE Core • VIT Chennai • Open for SDE Internships &amp; Collabs</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-personal-name">
+            <span class="title-editorial">Saumya</span>
+            <span class="title-accent">Pandya</span>
+          </h1>
+
+          <p class="hero-tagline" id="hero-tagline">
+            Building full-stack architectures, autonomous AI multi-agent systems, and open-source contributions at MIC and GSSoC 2026.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#work" class="btn-spatial-primary" data-magnetic data-magnetic-strength="0.2">
+              <span>View Projects</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+
+            <a href="#contact" class="btn-spatial-secondary" data-magnetic data-magnetic-strength="0.2">
+              <span>Contact Me</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Dual-Photo Spatial Stage -->
+        <div class="hero-visual-stage" id="hero-photo-stage">
+          <div class="photo-ambient-glow"></div>
+
+
+
+          <!-- Secondary / Background Offset Photo Card -->
+          <div class="photo-deck-card photo-card-secondary" id="photo-card-secondary" data-magnetic data-magnetic-strength="0.1" title="Click to view full photo">
+            <div class="photo-frame-inner">
+              <img src="/assets/user-portrait-2.png" alt="Life &amp; Energy" id="hero-portrait-img-2" class="deck-photo-img" />
+              <div class="photo-glass-overlay"></div>
+              <span class="photo-chip-tag">CAMPUS &amp; LIFE</span>
+            </div>
+          </div>
+
+          <!-- Primary / Foreground 3D Focus Card -->
+          <div class="photo-deck-card photo-card-primary" id="photo-card-primary" data-tilt data-tilt-max="9">
+            <div class="photo-frame-inner">
+              <img src="/assets/user-portrait-1.png" alt="Saumya Pandya" id="hero-portrait-img-1" class="deck-photo-img" />
+              <div class="photo-glass-overlay"></div>
+              <div class="photo-specular-glare"></div>
+
+              <!-- Minimalist Floating Frame Badges -->
+              <div class="photo-frame-topbar">
+                <span class="photo-status-pill">
+                  <span class="status-dot-radar"></span>
+                  <span>VIT CHENNAI // CSE CORE</span>
+                </span>
+                <span class="photo-index-tag">01 / 02</span>
+              </div>
+
+              <div class="photo-frame-bottombar">
+                <div class="photo-caption-info">
+                  <span class="photo-caption-title" id="photo-caption-name">Saumya Pandya</span>
+                  <span class="photo-caption-sub">CSE Core @ VIT Chennai</span>
+                </div>
+                <button class="photo-swap-btn" id="photo-swap-btn" title="Switch photo" aria-label="Switch photo">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="17 1 21 5 17 9"></polyline>
+                    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                    <polyline points="7 23 3 19 7 15"></polyline>
+                    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="hero-stats-strip" id="hero-stats-container">
+        <!-- Hydrated dynamically -->
+      </div>
+
+
+    </section>
+
+    <!-- SELECTED WORK SECTION -->
+    <section id="work" class="section-wrapper">
+      <div class="section-header">
+        <span class="section-tagline">Selected Work</span>
+        <h2 class="section-heading">Architectural <span class="editorial">Exhibitions</span> & Systems</h2>
+        <p class="section-subtext">A curated selection of spatial computing prototypes, institutional interfaces, and high-frequency digital artifacts.</p>
+      </div>
+
+      <!-- Work Category Filter -->
+      <div class="work-filter-bar" id="work-filter-bar">
+        <!-- Hydrated dynamically -->
+      </div>
+
+      <!-- 3D Project Cards Grid -->
+      <div class="projects-spatial-grid" id="projects-grid">
+        <!-- Hydrated dynamically -->
+      </div>
+    </section>
+
+    <!-- CAPABILITIES & SYSTEM MATRIX SECTION -->
+    <section id="capabilities" class="section-wrapper">
+      <div class="section-header">
+        <span class="section-tagline">Capabilities & Toolkit</span>
+        <h2 class="section-heading">Multi-Disciplinary <span class="editorial">Proficiencies</span></h2>
+        <p class="section-subtext">Engineered at the intersection of creative vision, high-performance GPU shaders, and human ergonomics.</p>
+      </div>
+
+      <div class="capabilities-grid" id="capabilities-grid">
+        <!-- Hydrated dynamically -->
+      </div>
+
+      <div class="tech-stack-container">
+        <div class="tech-stack-header">
+          <h3 class="tech-stack-title">Core Technologies & Instrumentation</h3>
+          <span style="font-family: var(--font-tech); font-size: 0.78rem; color: var(--accent);">Continuous Deployment & 60fps</span>
+        </div>
+        <div class="tech-stack-grid" id="tech-stack-grid">
+          <!-- Hydrated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT & TRAJECTORY SECTION -->
+    <section id="about" class="section-wrapper">
+      <div class="section-header">
+        <span class="section-tagline">Philosophy & Trajectory</span>
+        <h2 class="section-heading">About <span class="editorial">& Principles</span></h2>
+      </div>
+
+      <div class="about-grid-split">
+        
+        <!-- Left: Bio, Philosophy & Academic Credentials -->
+        <div class="about-bio-column">
+          <div class="about-lead-card">
+            <div id="about-bio-text">
+              <!-- Hydrated dynamically -->
+            </div>
+
+            <div class="about-spec-matrix">
+              <div class="spec-matrix-row">
+                <div class="spec-matrix-meta">
+                  <span class="spec-matrix-num">01</span>
+                  <span class="spec-matrix-tag">EDUCATION</span>
+                </div>
+                <div class="spec-matrix-body">
+                  <span class="spec-matrix-title">B.Tech Computer Science &amp; Engineering</span>
+                  <span class="spec-matrix-sub">2nd Year Core • VIT Chennai • Joined 2025</span>
+                </div>
+              </div>
+
+              <div class="spec-matrix-row">
+                <div class="spec-matrix-meta">
+                  <span class="spec-matrix-num">02</span>
+                  <span class="spec-matrix-tag">ACADEMIC STANDING</span>
+                </div>
+                <div class="spec-matrix-body">
+                  <span class="spec-matrix-title">8.53 CGPA Cumulative</span>
+                  <span class="spec-matrix-sub">Merit Standing • School of Computer Science</span>
+                </div>
+              </div>
+
+              <div class="spec-matrix-row">
+                <div class="spec-matrix-meta">
+                  <span class="spec-matrix-num">03</span>
+                  <span class="spec-matrix-tag">ROLES &amp; COHORTS</span>
+                </div>
+                <div class="spec-matrix-body">
+                  <span class="spec-matrix-title">Microsoft Innovations Club &amp; GSSoC 2026</span>
+                  <span class="spec-matrix-sub">Development Member • Open-Source Contributor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Editorial Portrait Card -->
+          <div class="about-editorial-photo-card" data-tilt data-tilt-max="5">
+            <div class="about-photo-wrapper">
+              <img src="/assets/user-portrait-2.png" alt="Saumya Pandya" class="about-photo-img" id="about-portrait-img" />
+            </div>
+            <div class="about-photo-caption">
+              <span class="caption-quote">"Building at the friction point where visual elegance meets computational rigor."</span>
+              <span class="caption-author">— Saumya Pandya</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Spatial Experience Timeline -->
+        <div class="about-timeline-column">
+          <div class="timeline-header-wrap">
+            <h3 class="about-subheading">Experience & Milestones</h3>
+            <span class="timeline-status-pill">Active Journey</span>
+          </div>
+          <div class="experience-timeline" id="experience-timeline">
+            <!-- Hydrated dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Full-Width Engineering & Design Principles Strip -->
+      <div class="about-principles-section">
+        <div class="principles-header">
+          <div>
+            <h3 class="about-subheading">Core Engineering & Design Principles</h3>
+            <p class="principles-subtag">Fundamental architectural standards governing every codebase and system I craft.</p>
+          </div>
+        </div>
+        <div class="principles-grid" id="principles-grid">
+          <!-- Hydrated dynamically with 4 columns -->
+        </div>
+      </div>
+    </section>
+
+    <!-- GITHUB & LINKEDIN ECOSYSTEM SECTION -->
+    <section id="presence" class="section-wrapper">
+      <div class="section-header">
+        <span class="section-tagline">Network & Open Source</span>
+        <h2 class="section-heading">Digital <span class="editorial">Ecosystem</span> & Code</h2>
+        <p class="section-subtext">Active open-source repositories, spatial engine architectures, and professional advisory coordinates.</p>
+      </div>
+
+      <div class="presence-grid" id="presence-grid">
+        <!-- Hydrated dynamically -->
+      </div>
+    </section>
+
+    <!-- CONTACT & TERMINAL STUDIO SECTION -->
+    <section id="contact" class="contact-section-wrapper">
+      <div class="contact-spatial-container">
+        <div class="contact-grid">
+          
+          <!-- Left: Pitch & Quick Copy -->
+          <div>
+            <span class="section-tagline" style="margin-bottom: 1rem;">Get In Touch</span>
+            <h2 class="contact-big-title">Let's build <span class="editorial">something</span> impactful.</h2>
+            <p class="contact-description">Interested in collaborating on software development, full-stack architectures, or technical opportunities? Feel free to reach out directly.</p>
+
+            <div class="copy-email-box" id="copy-email-box" data-magnetic data-magnetic-strength="0.15" title="Click to copy email">
+              <span class="copy-email-address" id="contact-email-text">saumyapandyaartist@gmail.com</span>
+              <span class="copy-email-badge">Copy Email</span>
+            </div>
+
+            <div class="social-links-row" id="social-links-row">
+              <!-- Hydrated dynamically -->
+            </div>
+          </div>
+
+          <!-- Right: Interactive Frosted Message Form -->
+          <div>
+            <form id="contact-form" class="contact-form-glass">
+              <div class="form-group">
+                <label class="form-label" for="sender-name">Your Name</label>
+                <input type="text" id="sender-name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sender-email">Your Email</label>
+                <input type="email" id="sender-email" class="form-input" placeholder="rahul@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="sender-message">Your Message</label>
+                <textarea id="sender-message" class="form-textarea" placeholder="Tell me about your project, idea, or opportunity..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-spatial-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem;" data-magnetic data-magnetic-strength="0.2">
+                <span>Send Message</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="spatial-footer">
+        <div>© <span id="footer-year">2026</span> Saumya Pandya. All rights reserved.</div>
+        <div class="footer-credits">Crafted with <span>Clean Software Architecture</span> & Editorial Aesthetics.</div>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- Interactive Case Study Modal Dialog -->
+  <div id="case-study-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Case Study Details">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div id="modal-dynamic-content">
+        <!-- Hydrated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast-notification" class="toast-notification" role="status" aria-live="polite"></div>
+
+  <!-- Application Orchestrator Script -->
+  <script type="module" src="./src/scripts/main.js"></script>
+</body>
+</html>
