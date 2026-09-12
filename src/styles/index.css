@@ -1129,15 +1129,29 @@ body {
 }
 .about-editorial-photo-card:hover .about-photo-img { transform: scale(1.03); }
 .about-photo-caption {
-  padding: 1.3rem 1.65rem;
-  background: rgba(255,255,255,0.72); border-top: 1px solid var(--border-subtle);
-  display: flex; flex-direction: column; gap: 0.28rem;
+  padding: 1.1rem 1.45rem;
+  background: rgba(255,255,255,0.78); border-top: 1px solid var(--border-subtle);
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+[data-theme="dark"] .about-photo-caption {
+  background: rgba(18, 20, 26, 0.85);
+}
+.caption-meta-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.caption-tag {
+  font-family: var(--font-tech); font-size: 0.68rem; font-weight: 700;
+  color: var(--accent); letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.caption-loc {
+  font-family: var(--font-tech); font-size: 0.68rem;
+  color: var(--text-muted);
 }
 .caption-quote {
   font-family: var(--font-serif); font-style: italic;
-  font-size: 1.08rem; color: var(--text-primary); line-height: 1.42;
+  font-size: 0.98rem; color: var(--text-primary); line-height: 1.4;
 }
-.caption-author { font-family: var(--font-tech); font-size: 0.76rem; color: var(--accent); font-weight: 600; }
 
 /* Timeline Column */
 .about-timeline-column { display: flex; flex-direction: column; gap: 1.35rem; }
