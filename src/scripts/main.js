@@ -190,11 +190,7 @@ class SpatialPortfolioApp {
         <div class="project-card-glare"></div>
         <div class="project-preview-frame">
           <div class="project-dynamic-canvas">
-            <div class="spatial-mesh-wire">
-              <div class="mesh-circle mesh-circle-1" style="border-color: ${p.accentColor}"></div>
-              <div class="mesh-circle mesh-circle-2"></div>
-              <div class="mesh-circle mesh-circle-3" style="border-color: ${p.accentColor}"></div>
-            </div>
+            ${this.getProjectGraphic(p)}
           </div>
           <span class="project-badge-corner" style="color: ${p.accentColor}">${p.category}</span>
           <span class="project-year-corner">${p.year}</span>
@@ -226,6 +222,143 @@ class SpatialPortfolioApp {
     if (this.tiltEngine) {
       this.tiltEngine.refresh();
     }
+  }
+
+  getProjectGraphic(p) {
+    if (p.id === 'project-1') {
+      // MIC EventsManager: Live QR Scanner & Gate Pass Terminal
+      return `
+        <div class="project-visual-terminal visual-orbitcheck">
+          <div class="terminal-grid-bg"></div>
+          <div class="qr-scanner-stage">
+            <div class="qr-code-mockup">
+              <div class="qr-corner top-left"></div>
+              <div class="qr-corner top-right"></div>
+              <div class="qr-corner bottom-left"></div>
+              <div class="qr-matrix-pattern">
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+                <span class="qr-cell"></span>
+              </div>
+              <div class="qr-laser-scanner"></div>
+            </div>
+          </div>
+          <div class="terminal-hud-pill hud-pill-status">
+            <span class="hud-status-dot pulse-amber"></span>
+            <span>GATE PASS // VERIFIED</span>
+          </div>
+          <div class="terminal-hud-pill hud-pill-metrics">
+            <span>MIC SUMMIT</span>
+            <span class="hud-divider">/</span>
+            <span>&lt; 2.0s SCAN</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (p.id === 'project-2') {
+      // Multi-Agent Financial Intelligence: Neural Agent Swarm Topology
+      return `
+        <div class="project-visual-terminal visual-multiagent">
+          <div class="terminal-grid-bg"></div>
+          <div class="agent-network-stage">
+            <svg class="agent-graph-svg" viewBox="0 0 240 130" fill="none">
+              <path d="M 50 65 L 120 25 L 190 65 L 120 105 Z" stroke="rgba(224, 75, 42, 0.45)" stroke-width="1.5" stroke-dasharray="3 3" />
+              <path d="M 50 65 L 190 65" stroke="rgba(224, 75, 42, 0.25)" stroke-width="1.2" />
+              <line x1="120" y1="25" x2="120" y2="105" stroke="rgba(224, 75, 42, 0.25)" stroke-width="1.2" />
+              <circle r="3.5" fill="#e04b2a">
+                <animateMotion path="M 50 65 L 120 25 L 190 65 L 120 105 Z" dur="3s" repeatCount="indefinite" />
+              </circle>
+              <g transform="translate(50, 65)">
+                <circle r="14" fill="rgba(224, 75, 42, 0.14)" stroke="#e04b2a" stroke-width="1.5"/>
+                <text y="3" text-anchor="middle" font-size="7" fill="#e04b2a" font-family="monospace" font-weight="700">SEC</text>
+              </g>
+              <g transform="translate(120, 25)">
+                <circle r="16" fill="rgba(224, 75, 42, 0.2)" stroke="#e04b2a" stroke-width="2"/>
+                <text y="3.5" text-anchor="middle" font-size="7.5" fill="#e04b2a" font-family="monospace" font-weight="700">SWARM</text>
+              </g>
+              <g transform="translate(190, 65)">
+                <circle r="14" fill="rgba(224, 75, 42, 0.14)" stroke="#e04b2a" stroke-width="1.5"/>
+                <text y="3" text-anchor="middle" font-size="7" fill="#e04b2a" font-family="monospace" font-weight="700">MKT</text>
+              </g>
+              <g transform="translate(120, 105)">
+                <circle r="14" fill="rgba(224, 75, 42, 0.14)" stroke="#e04b2a" stroke-width="1.5"/>
+                <text y="3" text-anchor="middle" font-size="7" fill="#e04b2a" font-family="monospace" font-weight="700">RISK</text>
+              </g>
+            </svg>
+          </div>
+          <div class="terminal-hud-pill hud-pill-status">
+            <span class="hud-status-dot pulse-coral"></span>
+            <span>AI SWARM // ACTIVE</span>
+          </div>
+          <div class="terminal-hud-pill hud-pill-metrics">
+            <span>&lt; 60s LATENCY</span>
+            <span class="hud-divider">/</span>
+            <span>100% SOURCED</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (p.id === 'project-3') {
+      // National Health Vault: Encrypted Hex Shield & Medical Telemetry
+      return `
+        <div class="project-visual-terminal visual-healthvault">
+          <div class="terminal-grid-bg"></div>
+          <div class="vault-stage">
+            <svg class="vault-svg" viewBox="0 0 240 130" fill="none">
+              <polygon points="120,14 165,40 165,92 120,118 75,92 75,40" stroke="rgba(13, 148, 104, 0.35)" stroke-width="1.5" fill="rgba(13, 148, 104, 0.08)" stroke-dasharray="4 2"/>
+              <polygon points="120,26 154,46 154,86 120,106 86,86 86,46" stroke="#0d9468" stroke-width="1.8" fill="rgba(13, 148, 104, 0.12)"/>
+              <path d="M 65 66 L 95 66 L 104 48 L 114 84 L 124 52 L 130 74 L 136 66 L 175 66" stroke="#0d9468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <div class="terminal-hud-pill hud-pill-status">
+            <span class="hud-status-dot pulse-sage"></span>
+            <span>VAULT // AES-256</span>
+          </div>
+          <div class="terminal-hud-pill hud-pill-metrics">
+            <span>ROLE-BASED ACL</span>
+            <span class="hud-divider">/</span>
+            <span>100% INTEGRITY</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Default / Project 4: Smart Irrigation IoT
+    return `
+      <div class="project-visual-terminal visual-irrigation">
+        <div class="terminal-grid-bg"></div>
+        <div class="iot-stage">
+          <svg class="iot-svg" viewBox="0 0 240 130" fill="none">
+            <circle cx="120" cy="65" r="46" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1.5" stroke-dasharray="4 4" />
+            <circle cx="120" cy="65" r="30" stroke="rgba(124, 58, 237, 0.4)" stroke-width="1.5" />
+            <circle cx="120" cy="65" r="13" fill="rgba(124, 58, 237, 0.18)" stroke="#7c3aed" stroke-width="2" />
+            <line x1="120" y1="18" x2="120" y2="112" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1" />
+            <line x1="72" y1="65" x2="168" y2="65" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1" />
+            <circle cx="120" cy="35" r="3" fill="#7c3aed" />
+            <circle cx="150" cy="65" r="3" fill="#7c3aed" />
+            <circle cx="90" cy="65" r="3" fill="#7c3aed" />
+            <circle cx="120" cy="95" r="3" fill="#7c3aed" />
+          </svg>
+        </div>
+        <div class="terminal-hud-pill hud-pill-status">
+          <span class="hud-status-dot pulse-violet"></span>
+          <span>TELEMETRY // SOIL PROBE</span>
+        </div>
+        <div class="terminal-hud-pill hud-pill-metrics">
+          <span>&lt; 250ms DELAY</span>
+          <span class="hud-divider">/</span>
+          <span>-40% WATER LOSS</span>
+        </div>
+      </div>
+    `;
   }
 
   renderCapabilities() {
