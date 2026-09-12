@@ -42,7 +42,7 @@ export const profileData = {
   projects: [
     {
       id: "project-1",
-      title: "MIC EventsManager (OrbitCheck)",
+      title: "Event Management (OrbitCheck)",
       category: "Full Stack & Event OS",
       year: "2026",
       featured: true,
@@ -52,7 +52,7 @@ export const profileData = {
       tags: ["TypeScript", "React / Next.js", "Webcam QR Scanner", "SQL", "Real-Time"],
       accentColor: "#d97706",
       mediaType: "interactive-preview",
-      liveUrl: "https://github.com/SAMJOD07-devz/MIC-PROJECT",
+      liveUrl: "https://mic-project-vtcs-2.vercel.app/",
       githubUrl: "https://github.com/SAMJOD07-devz/MIC-PROJECT",
       stats: [
         { label: "Check-in Speed", value: "< 2.0s" },
@@ -102,7 +102,7 @@ export const profileData = {
       tags: ["Full Stack", "TypeScript", "SQL", "Security", "Backend API"],
       accentColor: "#0d9468",
       mediaType: "interactive-preview",
-      liveUrl: "https://github.com/SAMJOD07-devz/National-Health-Vault",
+      liveUrl: "https://national-health-vault-mu.vercel.app/",
       githubUrl: "https://github.com/SAMJOD07-devz/National-Health-Vault",
       stats: [
         { label: "Data Integrity", value: "100%" },

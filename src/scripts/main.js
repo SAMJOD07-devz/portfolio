@@ -920,15 +920,27 @@ class SpatialPortfolioApp {
           <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
             ${project.tags.map(t => `<span class="project-tag-item" style="padding: 0.35rem 0.75rem;">${t}</span>`).join('')}
           </div>
-          ${project.githubUrl ? `
-            <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-spatial-primary" style="padding: 0.65rem 1.25rem; font-size: 0.8rem;">
-              <span>View on GitHub</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
-          ` : ''}
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
+            ${project.liveUrl && project.liveUrl !== '#' ? `
+              <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-spatial-primary" style="padding: 0.65rem 1.25rem; font-size: 0.8rem; background: var(--accent); color: #fff; border: 1px solid var(--accent); border-radius: var(--r-full); display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; font-weight: 600;">
+                <span>Launch Live App</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            ` : ''}
+            ${project.githubUrl ? `
+              <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-spatial-ghost" style="padding: 0.65rem 1.2rem; font-size: 0.8rem; border: 1px solid var(--border-glass); border-radius: var(--r-full); display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-primary); text-decoration: none;">
+                <span>Source Code</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            ` : ''}
+          </div>
         </div>
       </div>
     `;
