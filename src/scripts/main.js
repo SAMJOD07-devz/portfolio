@@ -38,10 +38,10 @@ class SpatialPortfolioApp {
     this.setupWelcomeEntrance();
     this.setupScrollReveal();
     this.setupThemeAccentSwitcher();
-    this.setupPhotoDeck();
     this.setupNavigationObserver();
     this.setupEmailCopy();
     this.setupCaseStudyModal();
+    this.setupResumeModal();
     this.setupContactForm();
 
     // 4. Initialize 3D Card Tilts and Magnetic Buttons
@@ -206,6 +206,21 @@ class SpatialPortfolioApp {
           <p class="project-tagline">${p.tagline}</p>
           <div class="project-tags-list">
             ${p.tags.map(t => `<span class="project-tag-item">${t}</span>`).join('')}
+          </div>
+          <div class="project-card-actions">
+            ${p.liveUrl && p.liveUrl !== '#' ? `
+              <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="card-action-btn live-action" onclick="event.stopPropagation();">
+                <span>Live App</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            ` : ''}
+            ${p.githubUrl ? `
+              <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="card-action-btn code-action" onclick="event.stopPropagation();">
+                <span>GitHub</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            ` : ''}
+            <span class="card-action-hint">Case Study ➔</span>
           </div>
         </div>
       </article>
@@ -874,6 +889,207 @@ class SpatialPortfolioApp {
         backdrop.classList.remove('open');
       }
     });
+  }
+
+  setupResumeModal() {
+    const modal = document.getElementById('resume-modal');
+    const navBtn = document.getElementById('nav-resume-btn');
+    const heroBtn = document.getElementById('hero-resume-btn');
+    const closeBtn = document.getElementById('resume-close-btn');
+    const printBtn = document.getElementById('resume-print-btn');
+    const bodyEl = document.getElementById('resume-modal-body');
+    if (!modal) return;
+
+    // Immediately pre-hydrate on page load so content is always present
+    if (bodyEl) {
+      bodyEl.innerHTML = this.getResumeHTML();
+    }
+
+    const openResume = (e) => {
+      if (e) e.preventDefault();
+      if (bodyEl) {
+        bodyEl.innerHTML = this.getResumeHTML();
+      }
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeResume = () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (navBtn) navBtn.addEventListener('click', openResume);
+    if (heroBtn) heroBtn.addEventListener('click', openResume);
+    if (closeBtn) closeBtn.addEventListener('click', closeResume);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeResume();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        closeResume();
+      }
+    });
+
+    if (printBtn) {
+      printBtn.addEventListener('click', (e) => {
+        // Native anchor download executes; provide friendly feedback
+        this.showToast('Downloading Saumya_Pandya_Resume.pdf...');
+      });
+    }
+  }
+
+  getResumeHTML() {
+    return `
+      <div class="resume-paper cv-authentic-layout">
+        <header class="cv-header">
+          <div class="cv-header-left">
+            <h1 class="cv-name">Saumya Pandya</h1>
+            <div class="cv-sub">2nd Year CSE (Core) Undergraduate | VIT Chennai</div>
+          </div>
+          <div class="cv-header-right">
+            <div><a href="mailto:saumyapandyaartist@gmail.com" class="cv-contact-link">Email</a></div>
+            <div><a href="tel:+917984641399" class="cv-contact-link">+91-7984641399</a></div>
+            <div><a href="https://www.linkedin.com/in/saumya-pandya-5a0376369" target="_blank" rel="noopener noreferrer" class="cv-contact-link">LinkedIn</a></div>
+            <div><a href="https://github.com/SAMJOD07-devz" target="_blank" rel="noopener noreferrer" class="cv-contact-link">GitHub</a></div>
+            <div><a href="https://leetcode.com/u/SAUMYA_PANDYA2207/" target="_blank" rel="noopener noreferrer" class="cv-contact-link">LeetCode</a></div>
+            <div><a href="https://samjod07-devz.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="cv-contact-link">Portfolio</a></div>
+          </div>
+        </header>
+
+        <div class="cv-divider"></div>
+
+        <!-- Education -->
+        <section class="cv-section">
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Education</div>
+          <div class="cv-row">
+            <div class="cv-col-date">2025–Present</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title"><strong>B.Tech, Computer Science &amp; Engineering (CSE Core)</strong>, VIT Chennai, <strong>CGPA: 8.53</strong></div>
+              <div class="cv-item-desc">Currently in 2nd year; School of Computer Science.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Roles & Involvement -->
+        <section class="cv-section">
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Roles &amp; Involvement</div>
+          <div class="cv-row">
+            <div class="cv-col-date">2025–Present</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title"><strong>Development Member</strong>, <em>Microsoft Innovations Club (MIC), VIT Chennai</em></div>
+              <div class="cv-item-desc">Contribute to full-stack tools and campus-facing software built by the club.</div>
+            </div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-col-date">2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title"><strong>Development Member</strong>, <em>GirlScript Summer of Code (GSSoC) 2026</em></div>
+              <div class="cv-item-desc">Open-source contributor across community projects.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="cv-section">
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Projects</div>
+
+          <!-- Project 1: OrbitCheck -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>Event Management — OrbitCheck</strong>, <span class="cv-badge-cat">Full-Stack &amp; Event OS</span>
+                <span class="cv-links-group">
+                  <a href="https://mic-project-vtcs-2.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+                  <a href="https://github.com/SAMJOD07-devz/MIC-PROJECT" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">Real-time campus event operating system and automated gate check-in platform, built for MIC and VIT Chennai.</div>
+              <ul class="cv-bullet-list">
+                <li>Engineered an automated webcam frame scanner using client-side canvas decoding with real-time database state synchronization.</li>
+                <li>Achieved sub-2-second check-in speed, 3-second live metrics sync, and cryptographically signed 2D QR passes to prevent duplicate entries.</li>
+                <li>Adopted by MIC at VIT Chennai for its digital entry management workflow.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> TypeScript, React/Next.js, Webcam QR Scanner, SQL, Real-Time Sync</div>
+            </div>
+          </div>
+
+          <!-- Project 2: Multi-Agent -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>Multi-Agent Autonomous Financial Intelligence</strong>, <span class="cv-badge-cat">Autonomous AI &amp; Systems</span>
+                <span class="cv-links-group">
+                  <a href="https://github.com/SAMJOD07-devz/Multi-Agent-Autonomous-Financial-Intelligence-System" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">A collaborative swarm of autonomous AI agents delivering fully cited financial intelligence in under 60 seconds.</div>
+              <ul class="cv-bullet-list">
+                <li>Built specialized agents for real-time news extraction, quantitative parsing, and risk modeling.</li>
+                <li>Delivered comprehensive, 100% source-cited financial dossiers with complete transparency.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> Python, Multi-Agent AI, LLM Orchestration, Market APIs, Data Pipelines</div>
+            </div>
+          </div>
+
+          <!-- Project 3: National Health Vault -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>National Health Vault</strong>, <span class="cv-badge-cat">Secure Systems &amp; Backend</span>
+                <span class="cv-links-group">
+                  <a href="https://national-health-vault-mu.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+                  <a href="https://github.com/SAMJOD07-devz/National-Health-Vault" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">Secure, centralized healthcare records management and digital vault architecture.</div>
+              <ul class="cv-bullet-list">
+                <li>Engineered an encrypted, role-based access vault with relational database design and patient dashboards.</li>
+                <li>Delivered a modular, OOP-based backend with AES encryption and 100% data integrity.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> TypeScript, SQL, AES Security, Backend REST API</div>
+            </div>
+          </div>
+
+          <!-- Project 4: Smart Irrigation IoT System -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">2025</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>Smart Irrigation IoT System</strong>, <span class="cv-badge-cat">IoT &amp; Embedded Systems</span>
+                <span class="cv-links-group">
+                  <a href="https://github.com/SAMJOD07-devz/smart-irrigation-system-iot" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">Automated, telemetry-driven soil moisture monitoring and precision water management system.</div>
+              <ul class="cv-bullet-list">
+                <li>Built a microcontroller-based feedback loop in C/C++ integrating soil probes and automated solenoid valves.</li>
+                <li>Achieved a 40% efficiency gain in water usage with under 250ms telemetry delay; showcased at the university IoT exhibition.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> C/C++, IoT Sensors, Embedded Systems, Telemetry, Algorithms</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Technical Skills -->
+        <section class="cv-section">
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Technical Skills</div>
+          <div class="cv-row cv-skills-row">
+            <div class="cv-col-date cv-skill-label">Languages</div>
+            <div class="cv-col-content cv-skill-val">C/C++, Java (OOP), Python, SQL</div>
+          </div>
+          <div class="cv-row cv-skills-row">
+            <div class="cv-col-date cv-skill-label">Domains</div>
+            <div class="cv-col-content cv-skill-val">Frontend (React, TypeScript), Backend (Node.js, REST APIs), OOP &amp; DSA, Blockchain &amp; Web3</div>
+          </div>
+        </section>
+      </div>
+    `;
   }
 
   openCaseStudy(projectId) {

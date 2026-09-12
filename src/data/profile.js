@@ -8,17 +8,17 @@
 export const profileData = {
   personal: {
     name: "Saumya Pandya",
-    title: "CSE Core Undergraduate & Creative Technologist",
+    title: "2nd Year CSE (Core) Undergraduate | VIT Chennai",
     pronouns: "he/him",
-    tagline: "Engineering full-stack architectures, autonomous AI multi-agent systems, and open-source software as a Development Member at Microsoft Innovations Club (MIC) and GSSoC 2026 Contributor.",
-    avatarUrl: "./assets/user-portrait-1.png",
+    tagline: "Engineering full-stack architectures, autonomous AI multi-agent systems, and open-source software as a Development Member at Microsoft Innovations Club (MIC) and GSSoC 2026.",
+    avatarUrl: "./assets/user-portrait-2.png",
     secondaryAvatarUrl: "./assets/user-portrait-2.png",
     location: "VIT Chennai, India",
     availability: "Open for SDE Internships, Research & Collabs",
     statusBadge: "2nd Year CSE Core • VIT Chennai",
     email: "saumyapandyaartist@gmail.com",
-    phone: "+91 98765 43210",
-    resumeUrl: "#",
+    phone: "+91-7984641399",
+    resumeUrl: "./assets/Saumya_Pandya_Resume.pdf",
     heroMetrics: [
       { value: "2nd Yr", label: "B.Tech CSE Core @ VIT Chennai" },
       { value: "8.53", label: "Academic CGPA @ VIT Chennai" },
@@ -42,14 +42,14 @@ export const profileData = {
   projects: [
     {
       id: "project-1",
-      title: "Event Management (OrbitCheck)",
-      category: "Full Stack & Event OS",
+      title: "Event Management — OrbitCheck",
+      category: "Full-Stack & Event OS",
       year: "2026",
       featured: true,
-      tagline: "Real-time campus event operating system & automated gate check-in platform built for Microsoft Innovations Club (MIC) & VIT Chennai.",
-      description: "Engineered a high-performance event platform integrating live club event discovery, duplicate-proof digital 2D QR passes, automated webcam video frame scanning, and live 3-second database metrics streaming.",
-      impact: "Streamlined summit attendance and club entry verification with zero-queue webcam QR check-in.",
-      tags: ["TypeScript", "React / Next.js", "Webcam QR Scanner", "SQL", "Real-Time"],
+      tagline: "Real-time campus event operating system and automated gate check-in platform, built for MIC and VIT Chennai.",
+      description: "Engineered an automated webcam frame scanner using client-side canvas decoding with real-time database state synchronization. Achieved sub-2-second check-in speed, 3-second live metrics sync, and cryptographically signed 2D QR passes to prevent duplicate entries. Adopted by MIC at VIT Chennai.",
+      impact: "Adopted by MIC at VIT Chennai for its digital entry management workflow.",
+      tags: ["TypeScript", "React/Next.js", "Webcam QR Scanner", "SQL", "Real-Time Sync"],
       accentColor: "#d97706",
       mediaType: "interactive-preview",
       liveUrl: "https://mic-project-vtcs-2.vercel.app/",
@@ -57,12 +57,12 @@ export const profileData = {
       stats: [
         { label: "Check-in Speed", value: "< 2.0s" },
         { label: "Metrics Sync", value: "3s Live" },
-        { label: "Pass Security", value: "2D QR Signed" }
+        { label: "Pass Security", value: "Signed 2D QR" }
       ],
       caseStudy: {
-        challenge: "Managing high-volume student check-ins at campus tech summits results in bottlenecks and duplicate ticket passes.",
-        solution: "Engineered an automated webcam frame scanner with client-side canvas decoding and real-time database state synchronization.",
-        outcome: "Adopted by Microsoft Innovations Club (MIC) at VIT Chennai for seamless digital entry management."
+        challenge: "Real-time campus event operating system and automated gate check-in platform, built for MIC and VIT Chennai.",
+        solution: "Engineered an automated webcam frame scanner using client-side canvas decoding with real-time database state synchronization.",
+        outcome: "Achieved sub-2-second check-in speed, 3-second live metrics sync, and cryptographically signed 2D QR passes to prevent duplicate entries. Adopted by MIC at VIT Chennai for its digital entry management workflow."
       }
     },
     {
@@ -71,9 +71,9 @@ export const profileData = {
       category: "Autonomous AI & Systems",
       year: "2026",
       featured: true,
-      tagline: "Eliminating market asymmetry through collaborative autonomous AI agents delivering cited financial intelligence in under 60 seconds.",
-      description: "Orchestrated autonomous multi-agent reasoning pipelines that analyze live market feeds, SEC regulatory filings, and user risk profiles to deliver explainable, personalized investment intelligence.",
-      impact: "Processes complex regulatory documentation and multi-source telemetry in sub-minute execution windows.",
+      tagline: "A collaborative swarm of autonomous AI agents delivering fully cited financial intelligence in under 60 seconds.",
+      description: "Built specialized agents for real-time news extraction, quantitative parsing, and risk modeling. Delivered comprehensive, 100% source-cited financial dossiers with complete transparency.",
+      impact: "Delivered comprehensive, 100% source-cited financial dossiers in under 60 seconds.",
       tags: ["Python", "Multi-Agent AI", "LLM Orchestration", "Market APIs", "Data Pipelines"],
       accentColor: "#e04b2a",
       mediaType: "interactive-preview",
@@ -85,9 +85,9 @@ export const profileData = {
         { label: "Citation Index", value: "100% Sourced" }
       ],
       caseStudy: {
-        challenge: "Retail investors lack the institutional infrastructure to rapidly parse dense regulatory filings and volatile telemetry.",
-        solution: "Built a collaborative swarm of specialized AI agents for real-time news extraction, quantitative parsing, and risk modeling.",
-        outcome: "Delivers comprehensive, cited financial intelligence dossiers with complete transparency."
+        challenge: "Retail investors lack institutional infrastructure to rapidly parse dense regulatory filings and volatile telemetry.",
+        solution: "Built specialized agents for real-time news extraction, quantitative parsing, and risk modeling.",
+        outcome: "Delivered comprehensive, 100% source-cited financial dossiers with complete transparency in under 60 seconds."
       }
     },
     {
@@ -96,23 +96,23 @@ export const profileData = {
       category: "Secure Systems & Backend",
       year: "2026",
       featured: true,
-      tagline: "Secure centralized healthcare records management and digital vault architecture.",
-      description: "Engineered a robust, privacy-compliant digital medical record vault featuring encrypted data streams, role-based access controls, and fast relational indexing.",
-      impact: "Designed for seamless patient-doctor authentication and high-integrity medical audits.",
-      tags: ["Full Stack", "TypeScript", "SQL", "Security", "Backend API"],
+      tagline: "Secure, centralized healthcare records management and digital vault architecture.",
+      description: "Engineered an encrypted, role-based access vault with relational database design and patient dashboards. Delivered a modular, OOP-based backend with AES encryption and 100% data integrity.",
+      impact: "Delivered a modular, OOP-based backend with AES encryption and 100% data integrity.",
+      tags: ["TypeScript", "SQL", "AES Security", "Backend REST API"],
       accentColor: "#0d9468",
       mediaType: "interactive-preview",
       liveUrl: "https://national-health-vault-mu.vercel.app/",
       githubUrl: "https://github.com/SAMJOD07-devz/National-Health-Vault",
       stats: [
         { label: "Data Integrity", value: "100%" },
-        { label: "Architecture", value: "Modular OOPS" },
+        { label: "Architecture", value: "Modular OOP" },
         { label: "Security Layer", value: "AES Encrypted" }
       ],
       caseStudy: {
         challenge: "Fragmented health records create latency and security vulnerabilities during emergency medical access.",
-        solution: "Engineered an encrypted, role-based access vault with relational database design and intuitive patient dashboards.",
-        outcome: "Clean modular repository structured with production-grade backend architecture."
+        solution: "Engineered an encrypted, role-based access vault with relational database design and patient dashboards.",
+        outcome: "Delivered a modular, OOP-based backend with AES encryption and 100% data integrity."
       }
     },
     {
@@ -121,23 +121,23 @@ export const profileData = {
       category: "IoT & Embedded Systems",
       year: "2025",
       featured: false,
-      tagline: "Automated telemetry-driven soil moisture monitoring and precision water management.",
-      description: "Developed an IoT sensing pipeline integrating hardware microcontrollers, telemetry sensors, and automated irrigation control with real-time analytics.",
-      impact: "Reduced simulated water waste by 40% using automated threshold switching.",
-      tags: ["C / C++", "IoT Sensors", "Embedded Systems", "Telemetry", "Algorithms"],
+      tagline: "Automated, telemetry-driven soil moisture monitoring and precision water management system.",
+      description: "Built a microcontroller-based feedback loop in C/C++ integrating soil probes and automated solenoid valves. Achieved a 40% efficiency gain in water usage with under 250ms telemetry delay; showcased at the university IoT exhibition.",
+      impact: "Achieved a 40% efficiency gain in water usage with under 250ms telemetry delay.",
+      tags: ["C/C++", "IoT Sensors", "Embedded Systems", "Telemetry", "Algorithms"],
       accentColor: "#7c3aed",
       mediaType: "interactive-preview",
       liveUrl: "https://github.com/SAMJOD07-devz/smart-irrigation-system-iot",
       githubUrl: "https://github.com/SAMJOD07-devz/smart-irrigation-system-iot",
       stats: [
-        { label: "Efficiency Gain", value: "~40%" },
+        { label: "Efficiency Gain", value: "40%" },
         { label: "Telemetry Delay", value: "< 250ms" },
-        { label: "Embedded Core", value: "C/C++" }
+        { label: "Core Stack", value: "C/C++" }
       ],
       caseStudy: {
         challenge: "Manual agricultural irrigation causes irregular moisture cycles and excessive water loss.",
-        solution: "Built a microcontroller-based feedback loop in C++ with soil probes and automated solenoid valves.",
-        outcome: "Showcased engineering prototype at university IoT exhibition."
+        solution: "Built a microcontroller-based feedback loop in C/C++ integrating soil probes and automated solenoid valves.",
+        outcome: "Achieved a 40% efficiency gain in water usage with under 250ms telemetry delay; showcased at the university IoT exhibition."
       }
     }
   ],

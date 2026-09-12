@@ -85,14 +85,23 @@
     </ul>
 
     <div class="nav-dock-actions">
+      <!-- Quick Resume Action for HR & Recruiters -->
+      <button id="nav-resume-btn" class="nav-resume-btn" title="View / Download Resume (CV)" aria-label="View Resume">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="12" y1="18" x2="12" y2="12"></line>
+          <polyline points="9 15 12 18 15 15"></polyline>
+        </svg>
+        <span>CV</span>
+      </button>
+
       <!-- Replay Intro Portal Button -->
       <button id="replay-intro-btn" class="nav-ctrl-btn" title="Replay Welcome Intro" aria-label="Replay Welcome Intro">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
         </svg>
       </button>
-
-
 
       <!-- Accent Color Dropdown Picker -->
       <div class="accent-dropdown">
@@ -139,60 +148,60 @@
               </svg>
             </a>
 
+            <button id="hero-resume-btn" class="btn-spatial-resume" data-magnetic data-magnetic-strength="0.2" title="View / Download Resume (CV)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <polyline points="9 15 12 18 15 15"></polyline>
+              </svg>
+              <span>Resume / CV</span>
+            </button>
+
             <a href="#contact" class="btn-spatial-secondary" data-magnetic data-magnetic-strength="0.2">
-              <span>Contact Me</span>
+              <span>Contact</span>
             </a>
+          </div>
+
+          <!-- Recruiter Fast-Facts / TL;DR Highlights -->
+          <div class="hero-recruiter-bar">
+            <div class="recruiter-pill">
+              <span class="recruiter-dot"></span>
+              <span class="recruiter-tag">ROLE:</span>
+              <span class="recruiter-text">SDE Intern '26</span>
+            </div>
+            <div class="recruiter-pill">
+              <span class="recruiter-tag">CGPA:</span>
+              <span class="recruiter-text">8.53 (VIT Chennai)</span>
+            </div>
+            <div class="recruiter-pill">
+              <span class="recruiter-tag">STATUS:</span>
+              <span class="recruiter-text">Open for Internships</span>
+            </div>
           </div>
         </div>
 
-        <!-- Right: Interactive Dual-Photo Spatial Stage -->
+        <!-- Right: Clean Editorial Portrait Stage -->
         <div class="hero-visual-stage" id="hero-photo-stage">
           <div class="photo-ambient-glow"></div>
 
-
-
-          <!-- Secondary / Background Offset Photo Card -->
-          <div class="photo-deck-card photo-card-secondary" id="photo-card-secondary" data-magnetic data-magnetic-strength="0.1" title="Click to view full photo">
-            <div class="photo-frame-inner">
-              <img src="./assets/user-portrait-2.png" alt="Life &amp; Energy" id="hero-portrait-img-2" class="deck-photo-img" />
-              <div class="photo-glass-overlay"></div>
-              <span class="photo-chip-tag">CAMPUS &amp; LIFE</span>
+          <div class="editorial-portrait-card" id="photo-card-primary" data-tilt data-tilt-max="5">
+            <div class="editorial-portrait-frame">
+              <img src="./assets/user-portrait-2.png" alt="Saumya Pandya" class="editorial-portrait-img" />
+              <div class="editorial-portrait-shine"></div>
             </div>
-          </div>
 
-          <!-- Primary / Foreground 3D Focus Card -->
-          <div class="photo-deck-card photo-card-primary" id="photo-card-primary" data-tilt data-tilt-max="9">
-            <div class="photo-frame-inner">
-              <img src="./assets/user-portrait-1.png" alt="Saumya Pandya" id="hero-portrait-img-1" class="deck-photo-img" />
-              <div class="photo-glass-overlay"></div>
-              <div class="photo-specular-glare"></div>
-
-              <!-- Minimalist Floating Frame Badges -->
-              <div class="photo-frame-topbar">
-                <span class="photo-status-pill">
-                  <span class="status-dot-radar"></span>
-                  <span>VIT CHENNAI // CSE CORE</span>
-                </span>
-                <span class="photo-index-tag">01 / 02</span>
+            <div class="editorial-portrait-caption">
+              <div class="caption-identity">
+                <span class="caption-name">Saumya Pandya</span>
+                <span class="caption-role">VIT Chennai • CSE Core '26</span>
               </div>
-
-              <div class="photo-frame-bottombar">
-                <div class="photo-caption-info">
-                  <span class="photo-caption-title" id="photo-caption-name">Saumya Pandya</span>
-                  <span class="photo-caption-sub">CSE Core @ VIT Chennai</span>
-                </div>
-                <button class="photo-swap-btn" id="photo-swap-btn" title="Switch photo" aria-label="Switch photo">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="17 1 21 5 17 9"></polyline>
-                    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                    <polyline points="7 23 3 19 7 15"></polyline>
-                    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-                  </svg>
-                </button>
+              <div class="caption-status">
+                <span class="status-pulse-dot"></span>
+                <span>Active</span>
               </div>
             </div>
           </div>
-        </div>
         </div>
 
       </div>
@@ -427,6 +436,35 @@
       <div id="modal-dynamic-content">
         <!-- Hydrated dynamically -->
       </div>
+    </div>
+  </div>
+
+  <!-- Interactive Professional Resume Modal Dialog -->
+  <div id="resume-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Professional Resume">
+    <div class="modal-card resume-modal-card">
+      <div class="resume-modal-topbar">
+        <div class="resume-modal-heading">
+          <span class="resume-badge-tag">CURRICULUM VITAE</span>
+          <h3 class="resume-person-name">Saumya Pandya</h3>
+        </div>
+        <div class="resume-topbar-actions">
+          <a id="resume-print-btn" href="./assets/Saumya_Pandya_Resume.pdf" download="Saumya_Pandya_Resume.pdf" class="resume-print-pill" title="Download Official CV (PDF)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download PDF</span>
+          </a>
+          <button id="resume-close-btn" class="modal-close-btn" aria-label="Close resume">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="resume-modal-body" class="resume-sheet"></div>
     </div>
   </div>
 
