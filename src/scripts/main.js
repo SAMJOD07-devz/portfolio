@@ -43,6 +43,8 @@ class SpatialPortfolioApp {
     this.setupCaseStudyModal();
     this.setupResumeModal();
     this.setupContactForm();
+    this.setupAboutLiveTelemetry();
+    this.setupPrincipleCardEffects();
 
     // 4. Initialize 3D Card Tilts and Magnetic Buttons
     this.tiltEngine = new TiltParallaxEngine();
@@ -87,8 +89,13 @@ class SpatialPortfolioApp {
     // Bio Paragraphs
     const bioContainer = document.getElementById('about-bio-text');
     if (bioContainer && personal.bioParagraphs) {
+      const formattedLead = personal.bioParagraphs[0]
+        .replace('Computer Science & Engineering', '<span class="text-shimmer-gold">Computer Science &amp; Engineering</span>')
+        .replace('VIT Chennai', '<span class="text-shimmer-gold">VIT Chennai</span>')
+        .replace('8.53 CGPA', '<span class="text-shimmer-gold">8.53 CGPA</span>');
+
       bioContainer.innerHTML = `
-        <p class="bio-lead-text">${personal.bioParagraphs[0]}</p>
+        <p class="bio-lead-text">${formattedLead}</p>
         ${personal.bioParagraphs.slice(1).map(p => `<p class="bio-body-text">${p}</p>`).join('')}
       `;
     }
@@ -869,6 +876,51 @@ class SpatialPortfolioApp {
     });
   }
 
+  setupAboutLiveTelemetry() {
+    const clockEl = document.getElementById('about-live-clock');
+    if (!clockEl) return;
+
+    const updateClock = () => {
+      try {
+        const now = new Date();
+        const istTime = now.toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Kolkata',
+          hour12: false,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        clockEl.textContent = `IST ${istTime}`;
+      } catch (err) {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        const secs = String(now.getSeconds()).padStart(2, '0');
+        clockEl.textContent = `LOCAL ${hours}:${mins}:${secs}`;
+      }
+    };
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  setupPrincipleCardEffects() {
+    const cards = document.querySelectorAll('.principle-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.removeProperty('--mouse-x');
+        card.style.removeProperty('--mouse-y');
+      });
+    });
+  }
+
   setupCaseStudyModal() {
     const backdrop = document.getElementById('case-study-modal');
     const closeBtn = document.getElementById('modal-close-btn');
@@ -965,7 +1017,7 @@ class SpatialPortfolioApp {
         <section class="cv-section">
           <div class="cv-section-title"><span class="cv-bullet-rect"></span>Education</div>
           <div class="cv-row">
-            <div class="cv-col-date">2025–Present</div>
+            <div class="cv-col-date">July 2025 – May 2029</div>
             <div class="cv-col-content">
               <div class="cv-item-title"><strong>B.Tech, Computer Science &amp; Engineering (CSE Core)</strong>, VIT Chennai, <strong>CGPA: 8.53</strong></div>
               <div class="cv-item-desc">Currently in 2nd year; School of Computer Science.</div>
@@ -1170,22 +1222,53 @@ class SpatialPortfolioApp {
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      const nameInput = document.getElementById('sender-name');
+      const emailInput = document.getElementById('sender-email');
+      const messageInput = document.getElementById('sender-message');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const senderEmail = emailInput ? emailInput.value.trim() : '';
+      const message = messageInput ? messageInput.value.trim() : '';
+
       const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : 'Send Transmission';
+      const originalText = submitBtn ? submitBtn.innerHTML : 'Send Message';
 
       if (submitBtn) {
-        submitBtn.innerHTML = '<span>Transmitting...</span>';
+        submitBtn.innerHTML = '<span>Opening Mail...</span>';
         submitBtn.disabled = true;
       }
 
+      const targetEmail = profileData.personal?.email || 'saumyapandyaartist@gmail.com';
+      const subject = encodeURIComponent(`Portfolio Message from ${name || 'Collaborator'}`);
+      const body = encodeURIComponent(
+        `Hi Saumya,\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${senderEmail}\n\n` +
+        `Message:\n${message}\n\n` +
+        `---\nSent via Saumya Pandya Spatial Portfolio`
+      );
+
+      const mailtoUrl = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+
       setTimeout(() => {
-        this.showToast('Transmission received! Will respond shortly.');
+        // Trigger mailto link
+        const mailLink = document.createElement('a');
+        mailLink.href = mailtoUrl;
+        mailLink.target = '_blank';
+        mailLink.rel = 'noopener noreferrer';
+        document.body.appendChild(mailLink);
+        mailLink.click();
+        document.body.removeChild(mailLink);
+
+        this.showToast('Opening your email app with pre-filled message!');
         form.reset();
+
         if (submitBtn) {
           submitBtn.innerHTML = originalText;
           submitBtn.disabled = false;
         }
-      }, 900);
+      }, 400);
     });
   }
 

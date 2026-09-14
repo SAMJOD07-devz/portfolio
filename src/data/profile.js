@@ -26,9 +26,9 @@ export const profileData = {
       { value: "133+", label: "Algorithms Solved (145+ Subs)" }
     ],
     bioParagraphs: [
-      "I am a Computer Science & Engineering (CSE Core) 2nd-year undergraduate at Vellore Institute of Technology (VIT Chennai), maintaining an 8.53 CGPA, contributing to open-source through GSSoC 2026, and serving as a Development Member at Microsoft Innovations Club (MIC).",
-      "My engineering spans Full-Stack web platforms (OrbitCheck EventsManager), Autonomous AI Multi-Agent reasoning systems, rigorous Object-Oriented Programming (OOPS) in C, C++, and Java, relational SQL database modeling, and decentralized Blockchain protocols.",
-      "With 133+ algorithmic problems solved on LeetCode and active open-source contributions across GitHub, GSSoC, and Codolio, I build software characterized by speed, clean architecture, and responsive modern aesthetics."
+      "I am a Computer Science & Engineering undergraduate at VIT Chennai (Class of 2029, 8.53 CGPA). Most of my week is spent building full-stack web projects, solving algorithmic challenges on LeetCode, and contributing to open-source through GSSoC 2026 and Microsoft Innovations Club (MIC).",
+      "I enjoy building tools that solve practical problems—like OrbitCheck, a real-time event gate check-in system adopted for campus tech events, and an autonomous financial multi-agent reasoning pipeline in Python. My core foundations are in C++, Java, relational SQL modeling, and modern web architectures.",
+      "I care about writing clean, reliable code that actually works in production, keeping my daily coding streak active, and constantly learning through hands-on development."
     ]
   },
 
@@ -144,28 +144,28 @@ export const profileData = {
 
   capabilities: [
     {
-      category: "Frontend Development & Spatial UI",
+      category: "Frontend Development & Interactive UI",
       icon: "orbit",
-      description: "Crafting highly responsive, interactive web applications with modern component architectures and fluid visual choreography.",
+      description: "Building responsive, interactive web applications with modern component structures, smooth animations, and clean CSS.",
       skills: ["React & Next.js Ecosystem", "TypeScript & Modern JavaScript", "Tailored CSS & Responsive Design Systems", "Spatial UI & Three.js / WebGL", "State Management & Performance Tuning"]
     },
     {
-      category: "Backend Systems & Database Design",
+      category: "Backend Systems & Database Modeling",
       icon: "code",
-      description: "Engineering scalable server architectures, secure RESTful APIs, and optimized relational database models.",
+      description: "Developing reliable backend services, clean RESTful APIs, and well-modeled relational databases with SQL.",
       skills: ["Node.js & Express Framework", "SQL (PostgreSQL / MySQL)", "Database Modeling & Complex Queries", "RESTful API Design & Integration", "Server-side Optimization"]
     },
     {
-      category: "Object-Oriented Programming (OOPS) & DSA",
+      category: "Object-Oriented Programming & DSA",
       icon: "compass",
-      description: "Applying strong OOPs design patterns, algorithmic optimization, and computational rigor across C, C++, and Java.",
+      description: "Practicing algorithms and data structures daily on LeetCode, and applying clean OOP patterns across C++, Java, and Python.",
       skills: ["C & C++ (DSA & Memory Management)", "Java (Object-Oriented Design & Principles)", "Abstraction, Encapsulation, Polymorphism, Inheritance", "Algorithmic Problem Solving", "Time & Space Complexity Optimization"]
     },
     {
-      category: "Blockchain & Decentralized Systems",
+      category: "AI Agents & Emerging Systems",
       icon: "sparkles",
-      description: "Exploring decentralized ledger technologies, smart contract logic, cryptographic hashing, and Web3 integration.",
-      skills: ["Blockchain Architecture & Consensus", "Smart Contract Logic & Solidity Basics", "Decentralized Protocols & P2P Networks", "Cryptographic Primitives & Hashing", "Web3 Frontend & DApp Integration"]
+      description: "Experimenting with multi-agent reasoning pipelines in Python, smart contract fundamentals, and practical Web3 integrations.",
+      skills: ["Python Multi-Agent Pipelines", "FastAPI & Automated Data Feeds", "Smart Contract Logic & Web3 Basics", "System Architecture & Security", "Continuous Integration & Deployment"]
     }
   ],
 
@@ -182,7 +182,7 @@ export const profileData = {
 
   experience: [
     {
-      period: "2025 — Present",
+      period: "July 2025 — May 2029",
       role: "B.Tech CSE Core Undergraduate (2nd Year)",
       company: "Vellore Institute of Technology (VIT Chennai)",
       location: "Chennai, India",
@@ -214,23 +214,23 @@ export const profileData = {
   principles: [
     {
       number: "01",
-      title: "Strong OOPs & Fundamentals",
-      description: "Technologies and frameworks evolve, but clean Object-Oriented design, memory management, and solid data structures remain timeless foundations."
+      title: "Strong DSA & CS Foundations",
+      description: "Frameworks change fast, but solid problem-solving stays. Practicing DSA regularly on LeetCode, understanding time-space trade-offs, and writing clean OOP in C++ and Java gives me the confidence to adapt to any stack."
     },
     {
       number: "02",
-      title: "End-to-End System Harmony",
-      description: "A great application requires seamless synergy between intuitive frontend interfaces, resilient backend APIs, and structured SQL databases."
+      title: "Build for Real People & Use Cases",
+      description: "A project only matters if it genuinely works in practice. When building OrbitCheck for MIC campus events, the focus was real-time speed, reliable QR verification, and zero hassle for attendees at the door."
     },
     {
       number: "03",
-      title: "Decentralized & Resilient Logic",
-      description: "Exploring blockchain and consensus primitives to build trustless, transparent, and fault-tolerant software architectures."
+      title: "Clean, Maintainable Architecture",
+      description: "Whether it's responsive React interfaces, clean REST APIs, or structured SQL schemas, I like keeping code readable, data flow predictable, and components modular without unnecessary over-engineering."
     },
     {
       number: "04",
-      title: "Zero-Latency Performance",
-      description: "Optimization is an engineering discipline. 60fps animations, efficient time complexity, and minimal bundle sizes are non-negotiable."
+      title: "Consistency & Hands-On Growth",
+      description: "Consistency beats cramming. Staying active with daily problem-solving, contributing to open source via GSSoC, and testing new ideas in AI and systems keeps my engineering momentum steady every single week."
     }
   ],
 

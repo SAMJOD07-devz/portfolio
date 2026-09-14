@@ -268,40 +268,64 @@
         <!-- Left: Bio, Philosophy & Academic Credentials -->
         <div class="about-bio-column">
           <div class="about-lead-card">
+            <!-- Animated Telemetry & Live Status Strip -->
+            <div class="about-telemetry-bar">
+              <div class="telemetry-pill">
+                <span class="telemetry-pulse-dot"></span>
+                <span class="telemetry-status-text">VIT CHENNAI // CSE CORE</span>
+              </div>
+              <div class="telemetry-live-clock">
+                <span class="telemetry-clock-glyph">⚡</span>
+                <span id="about-live-clock">IST --:--:--</span>
+              </div>
+            </div>
+
             <div id="about-bio-text">
               <!-- Hydrated dynamically -->
             </div>
 
             <div class="about-spec-matrix">
               <div class="spec-matrix-row">
+                <div class="spec-matrix-scanline"></div>
                 <div class="spec-matrix-meta">
                   <span class="spec-matrix-num">01</span>
                   <span class="spec-matrix-tag">EDUCATION</span>
                 </div>
                 <div class="spec-matrix-body">
-                  <span class="spec-matrix-title">B.Tech Computer Science &amp; Engineering</span>
-                  <span class="spec-matrix-sub">2nd Year Core • VIT Chennai • Joined 2025</span>
+                  <div class="spec-title-row">
+                    <span class="spec-matrix-title">B.Tech Computer Science &amp; Engineering</span>
+                    <span class="spec-matrix-badge">July 2025 – May 2029</span>
+                  </div>
+                  <span class="spec-matrix-sub">2nd Year Core • VIT Chennai • July 2025 – May 2029</span>
                 </div>
               </div>
 
               <div class="spec-matrix-row">
+                <div class="spec-matrix-scanline"></div>
                 <div class="spec-matrix-meta">
                   <span class="spec-matrix-num">02</span>
                   <span class="spec-matrix-tag">ACADEMIC STANDING</span>
                 </div>
                 <div class="spec-matrix-body">
-                  <span class="spec-matrix-title">8.53 CGPA Cumulative</span>
+                  <div class="spec-title-row">
+                    <span class="spec-matrix-title">8.53 CGPA Cumulative</span>
+                    <span class="spec-matrix-badge highlight">★ MERIT RANK</span>
+                  </div>
                   <span class="spec-matrix-sub">Merit Standing • School of Computer Science</span>
                 </div>
               </div>
 
               <div class="spec-matrix-row">
+                <div class="spec-matrix-scanline"></div>
                 <div class="spec-matrix-meta">
                   <span class="spec-matrix-num">03</span>
                   <span class="spec-matrix-tag">ROLES &amp; COHORTS</span>
                 </div>
                 <div class="spec-matrix-body">
-                  <span class="spec-matrix-title">Microsoft Innovations Club &amp; GSSoC 2026</span>
+                  <div class="spec-title-row">
+                    <span class="spec-matrix-title">Microsoft Innovations Club &amp; GSSoC 2026</span>
+                    <span class="spec-matrix-badge">ACTIVE DEV</span>
+                  </div>
                   <span class="spec-matrix-sub">Development Member • Open-Source Contributor</span>
                 </div>
               </div>
@@ -311,6 +335,14 @@
           <!-- Editorial Portrait Card -->
           <div class="about-editorial-photo-card" data-tilt data-tilt-max="5">
             <div class="about-photo-wrapper">
+              <div class="photo-floating-hud-badge">
+                <span class="hud-live-dot"></span>
+                <span>VIT CHENNAI // CAMPUS</span>
+              </div>
+              <div class="photo-reticle reticle-tl"></div>
+              <div class="photo-reticle reticle-tr"></div>
+              <div class="photo-reticle reticle-bl"></div>
+              <div class="photo-reticle reticle-br"></div>
               <img src="./assets/user-portrait-2.png" alt="Saumya Pandya" class="about-photo-img" id="about-portrait-img" />
             </div>
             <div class="about-photo-caption">
@@ -327,7 +359,10 @@
         <div class="about-timeline-column">
           <div class="timeline-header-wrap">
             <h3 class="about-subheading">Experience & Milestones</h3>
-            <span class="timeline-status-pill">Active Journey</span>
+            <span class="timeline-status-pill">
+              <span class="pill-radar-dot"></span>
+              <span>Active Journey</span>
+            </span>
           </div>
           <div class="experience-timeline" id="experience-timeline">
             <!-- Hydrated dynamically -->
@@ -340,8 +375,8 @@
       <div class="about-principles-section">
         <div class="principles-header">
           <div>
-            <h3 class="about-subheading">Core Engineering & Design Principles</h3>
-            <p class="principles-subtag">Fundamental architectural standards governing every codebase and system I craft.</p>
+            <h3 class="about-subheading">How I Approach Engineering</h3>
+            <p class="principles-subtag">Practical habits and standards I follow when writing code, solving problems, and building projects.</p>
           </div>
         </div>
         <div class="principles-grid" id="principles-grid">
