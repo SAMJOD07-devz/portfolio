@@ -32,11 +32,13 @@ class SpatialPortfolioApp {
     this.renderExperience();
     this.renderPrinciples();
     this.renderPresenceHub();
+    this.renderCredentials();
     this.renderSocialLinks();
 
     // 3. Initialize Interactive Features
     this.setupWelcomeEntrance();
     this.setupScrollReveal();
+    this.setupThemeToggle();
     this.setupThemeAccentSwitcher();
     this.setupNavigationObserver();
     this.setupEmailCopy();
@@ -69,7 +71,7 @@ class SpatialPortfolioApp {
       heroName.innerHTML = `<span class="title-editorial">${first}</span><span class="title-accent">${rest}</span>`;
     }
 
-    // Hero tagline — keep the updated static text, only overwrite if profile has a specific tagline
+    // Hero tagline
     const heroTagline = document.getElementById('hero-tagline');
     if (heroTagline && personal.tagline) {
       heroTagline.textContent = personal.tagline;
@@ -90,7 +92,7 @@ class SpatialPortfolioApp {
     const bioContainer = document.getElementById('about-bio-text');
     if (bioContainer && personal.bioParagraphs) {
       const formattedLead = personal.bioParagraphs[0]
-        .replace('Computer Science & Engineering', '<span class="text-shimmer-gold">Computer Science &amp; Engineering</span>')
+        .replace('Computer Science student', '<span class="text-shimmer-gold">Computer Science student</span>')
         .replace('VIT Chennai', '<span class="text-shimmer-gold">VIT Chennai</span>')
         .replace('8.53 CGPA', '<span class="text-shimmer-gold">8.53 CGPA</span>');
 
@@ -100,15 +102,10 @@ class SpatialPortfolioApp {
       `;
     }
 
-    // Hero & About Portraits
-    const heroImg1 = document.getElementById('hero-portrait-img-1');
-    if (heroImg1 && personal.avatarUrl) {
-      heroImg1.src = personal.avatarUrl;
-    }
-
-    const heroImg2 = document.getElementById('hero-portrait-img-2');
-    if (heroImg2 && personal.secondaryAvatarUrl) {
-      heroImg2.src = personal.secondaryAvatarUrl;
+    // Portraits
+    const heroImg = document.querySelector('.editorial-portrait-img');
+    if (heroImg && personal.avatarUrl) {
+      heroImg.src = personal.avatarUrl;
     }
 
     const aboutImg = document.getElementById('about-portrait-img');
@@ -116,44 +113,12 @@ class SpatialPortfolioApp {
       aboutImg.src = personal.secondaryAvatarUrl;
     }
 
-    const photoName = document.getElementById('photo-caption-name');
-    if (photoName) photoName.textContent = personal.name;
-
     // Contact Coordinates
     const contactEmail = document.getElementById('contact-email-text');
     if (contactEmail) contactEmail.textContent = personal.email;
 
     const footerYear = document.getElementById('footer-year');
     if (footerYear) footerYear.textContent = new Date().getFullYear();
-  }
-
-  setupPhotoDeck() {
-    const stage = document.getElementById('hero-photo-stage');
-    const swapBtn = document.getElementById('photo-swap-btn');
-    const secondaryCard = document.getElementById('photo-card-secondary');
-    if (!stage) return;
-
-    const toggleSwap = (e) => {
-      if (e) e.stopPropagation();
-      stage.classList.toggle('swapped');
-      
-      const indexTag = stage.querySelector('.photo-index-tag');
-      if (indexTag) {
-        indexTag.textContent = stage.classList.contains('swapped') ? '02 / 02' : '01 / 02';
-      }
-
-      if (this.tiltEngine) {
-        this.tiltEngine.refresh();
-      }
-    };
-
-    if (swapBtn) {
-      swapBtn.addEventListener('click', toggleSwap);
-    }
-
-    if (secondaryCard) {
-      secondaryCard.addEventListener('click', toggleSwap);
-    }
   }
 
   renderProjects() {
@@ -247,8 +212,145 @@ class SpatialPortfolioApp {
   }
 
   getProjectGraphic(p) {
-    if (p.id === 'project-1') {
-      // MIC EventsManager: Live QR Scanner & Gate Pass Terminal
+    if (p.id === 'aims') {
+      // AIMS: 3D Isometric Warehouse Grid & Automated SQL Trigger Alert
+      return `
+        <div class="project-visual-terminal visual-aims">
+          <div class="terminal-grid-bg"></div>
+          <div class="aims-warehouse-stage">
+            <svg class="aims-svg" viewBox="0 0 240 130" fill="none">
+              <!-- Isometric Ground Grid -->
+              <polygon points="120,25 200,65 120,105 40,65" stroke="rgba(217, 119, 6, 0.3)" stroke-width="1.2" fill="rgba(217, 119, 6, 0.04)" />
+              <line x1="80" y1="45" x2="160" y2="85" stroke="rgba(217, 119, 6, 0.2)" stroke-width="1" />
+              <line x1="160" y1="45" x2="80" y2="85" stroke="rgba(217, 119, 6, 0.2)" stroke-width="1" />
+              
+              <!-- Warehouse Rack Column 1 -->
+              <g transform="translate(70, 48)">
+                <polygon points="0,0 20,-10 20,22 0,32" fill="rgba(217, 119, 6, 0.2)" stroke="#d97706" stroke-width="1.2" />
+                <polygon points="20,-10 40,0 40,32 20,22" fill="rgba(217, 119, 6, 0.12)" stroke="#d97706" stroke-width="1.2" />
+                <polygon points="0,0 20,-10 40,0 20,10" fill="rgba(217, 119, 6, 0.32)" stroke="#d97706" stroke-width="1.2" />
+                <circle cx="20" cy="8" r="2.5" fill="#d97706" />
+              </g>
+
+              <!-- Warehouse Rack Column 2 (Active Reorder Node) -->
+              <g transform="translate(130, 48)">
+                <polygon points="0,0 20,-10 20,22 0,32" fill="rgba(224, 75, 42, 0.25)" stroke="#e04b2a" stroke-width="1.2" />
+                <polygon points="20,-10 40,0 40,32 20,22" fill="rgba(224, 75, 42, 0.15)" stroke="#e04b2a" stroke-width="1.2" />
+                <polygon points="0,0 20,-10 40,0 20,10" fill="rgba(224, 75, 42, 0.4)" stroke="#e04b2a" stroke-width="1.2" />
+                <circle cx="20" cy="8" r="3" fill="#e04b2a">
+                  <animate attributeName="r" values="2;4;2" dur="1.8s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite" />
+                </circle>
+              </g>
+
+              <!-- Radar Alert Arc -->
+              <path d="M 110 32 A 35 35 0 0 1 170 32" stroke="#d97706" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.8" />
+            </svg>
+          </div>
+          <div class="terminal-hud-pill hud-pill-status">
+            <span class="hud-status-dot pulse-amber"></span>
+            <span>STOCK // AUDITED</span>
+          </div>
+          <div class="terminal-hud-pill hud-pill-metrics">
+            <span>3NF LEDGER</span>
+            <span class="hud-divider">/</span>
+            <span>913k SALES</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (p.id === 'soundchain') {
+      // SoundChain: 3D Vinyl Record & Instant BPS Smart Contract Settlement
+      return `
+        <div class="project-visual-terminal visual-soundchain">
+          <div class="terminal-grid-bg"></div>
+          <div class="soundchain-vinyl-stage">
+            <svg class="vinyl-svg" viewBox="0 0 240 130" fill="none">
+              <!-- Outer Rotating Vinyl Record -->
+              <g class="rotating-vinyl" transform="translate(120, 65)">
+                <circle r="48" fill="#14151a" stroke="rgba(245, 158, 11, 0.5)" stroke-width="2" />
+                <circle r="42" stroke="rgba(245, 158, 11, 0.25)" stroke-width="0.8" stroke-dasharray="8 4" />
+                <circle r="36" stroke="rgba(245, 158, 11, 0.2)" stroke-width="0.8" />
+                <circle r="30" stroke="rgba(245, 158, 11, 0.25)" stroke-width="0.8" stroke-dasharray="6 3" />
+                <circle r="24" stroke="rgba(245, 158, 11, 0.3)" stroke-width="0.8" />
+                <circle r="16" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+                <circle r="4" fill="#14151a" />
+              </g>
+
+              <!-- Equalizer Audio Wavebars -->
+              <g transform="translate(42, 50)">
+                <rect x="0" y="8" width="3" height="14" rx="1.5" fill="#f59e0b" opacity="0.6">
+                  <animate attributeName="height" values="8;24;12;20;8" dur="1.2s" repeatCount="indefinite" />
+                </rect>
+                <rect x="7" y="2" width="3" height="20" rx="1.5" fill="#f59e0b" opacity="0.85">
+                  <animate attributeName="height" values="18;10;26;14;18" dur="1.1s" repeatCount="indefinite" />
+                </rect>
+                <rect x="14" y="5" width="3" height="17" rx="1.5" fill="#f59e0b" opacity="0.7">
+                  <animate attributeName="height" values="12;28;15;22;12" dur="1.3s" repeatCount="indefinite" />
+                </rect>
+              </g>
+
+              <g transform="translate(182, 50)">
+                <rect x="0" y="5" width="3" height="17" rx="1.5" fill="#f59e0b" opacity="0.7">
+                  <animate attributeName="height" values="14;26;10;22;14" dur="1.25s" repeatCount="indefinite" />
+                </rect>
+                <rect x="7" y="2" width="3" height="20" rx="1.5" fill="#f59e0b" opacity="0.85">
+                  <animate attributeName="height" values="20;12;26;16;20" dur="1.05s" repeatCount="indefinite" />
+                </rect>
+                <rect x="14" y="8" width="3" height="14" rx="1.5" fill="#f59e0b" opacity="0.6">
+                  <animate attributeName="height" values="10;22;12;26;10" dur="1.35s" repeatCount="indefinite" />
+                </rect>
+              </g>
+            </svg>
+          </div>
+          <div class="terminal-hud-pill hud-pill-status">
+            <span class="hud-status-dot pulse-amber"></span>
+            <span>SOLIDITY 0.8.20</span>
+          </div>
+          <div class="terminal-hud-pill hud-pill-metrics">
+            <span>10,000 BPS</span>
+            <span class="hud-divider">/</span>
+            <span>ETH &amp; USDC</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (p.id === 'inhv') {
+      // iNHV: Aadhaar Medical Vault & Google Gemma 4 Function Calling
+      return `
+        <div class="project-visual-terminal visual-inhv">
+          <div class="terminal-grid-bg"></div>
+          <div class="inhv-gemma-stage">
+            <svg class="vault-svg" viewBox="0 0 240 130" fill="none">
+              <polygon points="120,14 165,40 165,92 120,118 75,92 75,40" stroke="rgba(13, 148, 104, 0.35)" stroke-width="1.5" fill="rgba(13, 148, 104, 0.08)" stroke-dasharray="4 2"/>
+              <polygon points="120,26 154,46 154,86 120,106 86,86 86,46" stroke="#0d9468" stroke-width="1.8" fill="rgba(13, 148, 104, 0.12)"/>
+              
+              <!-- Clinical ECG Waveform with Gemma 4 Pulse -->
+              <path d="M 65 66 L 95 66 L 104 48 L 114 84 L 124 52 L 130 74 L 136 66 L 175 66" stroke="#0d9468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              
+              <!-- Gemma 4 Neural Function Calling Nodes -->
+              <circle cx="120" cy="26" r="3.5" fill="#0d9468" />
+              <circle cx="154" cy="46" r="3" fill="#0d9468" />
+              <circle cx="86" cy="46" r="3" fill="#0d9468" />
+            </svg>
+          </div>
+          <div class="terminal-hud-pill hud-pill-status">
+            <span class="hud-status-dot pulse-sage"></span>
+            <span>GEMMA 4 // RAG ACTIVE</span>
+          </div>
+          <div class="terminal-hud-pill hud-pill-metrics">
+            <span>FUNCTION CALLING</span>
+            <span class="hud-divider">/</span>
+            <span>AES-256</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (p.id === 'orbitcheck') {
+      // OrbitCheck: Live QR Scanner & Gate Pass Terminal
       return `
         <div class="project-visual-terminal visual-orbitcheck">
           <div class="terminal-grid-bg"></div>
@@ -272,7 +374,7 @@ class SpatialPortfolioApp {
             </div>
           </div>
           <div class="terminal-hud-pill hud-pill-status">
-            <span class="hud-status-dot pulse-amber"></span>
+            <span class="hud-status-dot pulse-coral"></span>
             <span>GATE PASS // VERIFIED</span>
           </div>
           <div class="terminal-hud-pill hud-pill-metrics">
@@ -284,100 +386,79 @@ class SpatialPortfolioApp {
       `;
     }
 
-    if (p.id === 'project-2') {
-      // Multi-Agent Financial Intelligence: Neural Agent Swarm Topology
+    if (p.id === 'portfolio') {
+      // Personal Portfolio: Physics Canvas Particle Constellation
       return `
-        <div class="project-visual-terminal visual-multiagent">
+        <div class="project-visual-terminal visual-portfolio">
           <div class="terminal-grid-bg"></div>
-          <div class="agent-network-stage">
-            <svg class="agent-graph-svg" viewBox="0 0 240 130" fill="none">
-              <path d="M 50 65 L 120 25 L 190 65 L 120 105 Z" stroke="rgba(224, 75, 42, 0.45)" stroke-width="1.5" stroke-dasharray="3 3" />
-              <path d="M 50 65 L 190 65" stroke="rgba(224, 75, 42, 0.25)" stroke-width="1.2" />
-              <line x1="120" y1="25" x2="120" y2="105" stroke="rgba(224, 75, 42, 0.25)" stroke-width="1.2" />
-              <circle r="3.5" fill="#e04b2a">
-                <animateMotion path="M 50 65 L 120 25 L 190 65 L 120 105 Z" dur="3s" repeatCount="indefinite" />
-              </circle>
-              <g transform="translate(50, 65)">
-                <circle r="14" fill="rgba(224, 75, 42, 0.14)" stroke="#e04b2a" stroke-width="1.5"/>
-                <text y="3" text-anchor="middle" font-size="7" fill="#e04b2a" font-family="monospace" font-weight="700">SEC</text>
-              </g>
-              <g transform="translate(120, 25)">
-                <circle r="16" fill="rgba(224, 75, 42, 0.2)" stroke="#e04b2a" stroke-width="2"/>
-                <text y="3.5" text-anchor="middle" font-size="7.5" fill="#e04b2a" font-family="monospace" font-weight="700">SWARM</text>
-              </g>
-              <g transform="translate(190, 65)">
-                <circle r="14" fill="rgba(224, 75, 42, 0.14)" stroke="#e04b2a" stroke-width="1.5"/>
-                <text y="3" text-anchor="middle" font-size="7" fill="#e04b2a" font-family="monospace" font-weight="700">MKT</text>
-              </g>
-              <g transform="translate(120, 105)">
-                <circle r="14" fill="rgba(224, 75, 42, 0.14)" stroke="#e04b2a" stroke-width="1.5"/>
-                <text y="3" text-anchor="middle" font-size="7" fill="#e04b2a" font-family="monospace" font-weight="700">RISK</text>
-              </g>
+          <div class="portfolio-particles-stage">
+            <svg class="portfolio-svg" viewBox="0 0 240 130" fill="none">
+              <circle cx="120" cy="65" r="42" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1.2" stroke-dasharray="4 3" />
+              <circle cx="120" cy="65" r="24" stroke="rgba(124, 58, 237, 0.4)" stroke-width="1.4" />
+              <circle cx="120" cy="65" r="8" fill="#7c3aed" />
+              
+              <!-- Orbital Particle Nodes -->
+              <circle cx="90" cy="50" r="3" fill="#7c3aed" opacity="0.8" />
+              <circle cx="150" cy="80" r="3.5" fill="#7c3aed" opacity="0.8" />
+              <circle cx="145" cy="45" r="2.5" fill="#7c3aed" opacity="0.6" />
+              <circle cx="95" cy="85" r="2.5" fill="#7c3aed" opacity="0.6" />
+
+              <line x1="90" y1="50" x2="120" y2="65" stroke="rgba(124, 58, 237, 0.3)" stroke-width="1" />
+              <line x1="150" y1="80" x2="120" y2="65" stroke="rgba(124, 58, 237, 0.3)" stroke-width="1" />
+              <line x1="145" y1="45" x2="120" y2="65" stroke="rgba(124, 58, 237, 0.3)" stroke-width="1" />
             </svg>
           </div>
           <div class="terminal-hud-pill hud-pill-status">
-            <span class="hud-status-dot pulse-coral"></span>
-            <span>AI SWARM // ACTIVE</span>
+            <span class="hud-status-dot pulse-violet"></span>
+            <span>VANILLA JS // 60 FPS</span>
           </div>
           <div class="terminal-hud-pill hud-pill-metrics">
-            <span>&lt; 60s LATENCY</span>
+            <span>ZERO BLOAT</span>
             <span class="hud-divider">/</span>
-            <span>100% SOURCED</span>
+            <span>CSS TOKENS</span>
           </div>
         </div>
       `;
     }
 
-    if (p.id === 'project-3') {
-      // National Health Vault: Encrypted Hex Shield & Medical Telemetry
-      return `
-        <div class="project-visual-terminal visual-healthvault">
-          <div class="terminal-grid-bg"></div>
-          <div class="vault-stage">
-            <svg class="vault-svg" viewBox="0 0 240 130" fill="none">
-              <polygon points="120,14 165,40 165,92 120,118 75,92 75,40" stroke="rgba(13, 148, 104, 0.35)" stroke-width="1.5" fill="rgba(13, 148, 104, 0.08)" stroke-dasharray="4 2"/>
-              <polygon points="120,26 154,46 154,86 120,106 86,86 86,46" stroke="#0d9468" stroke-width="1.8" fill="rgba(13, 148, 104, 0.12)"/>
-              <path d="M 65 66 L 95 66 L 104 48 L 114 84 L 124 52 L 130 74 L 136 66 L 175 66" stroke="#0d9468" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </div>
-          <div class="terminal-hud-pill hud-pill-status">
-            <span class="hud-status-dot pulse-sage"></span>
-            <span>VAULT // AES-256</span>
-          </div>
-          <div class="terminal-hud-pill hud-pill-metrics">
-            <span>ROLE-BASED ACL</span>
-            <span class="hud-divider">/</span>
-            <span>100% INTEGRITY</span>
-          </div>
-        </div>
-      `;
-    }
-
-    // Default / Project 4: Smart Irrigation IoT
+    // Default / Multi-Agent: Neural Swarm Topology
     return `
-      <div class="project-visual-terminal visual-irrigation">
+      <div class="project-visual-terminal visual-multiagent">
         <div class="terminal-grid-bg"></div>
-        <div class="iot-stage">
-          <svg class="iot-svg" viewBox="0 0 240 130" fill="none">
-            <circle cx="120" cy="65" r="46" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1.5" stroke-dasharray="4 4" />
-            <circle cx="120" cy="65" r="30" stroke="rgba(124, 58, 237, 0.4)" stroke-width="1.5" />
-            <circle cx="120" cy="65" r="13" fill="rgba(124, 58, 237, 0.18)" stroke="#7c3aed" stroke-width="2" />
-            <line x1="120" y1="18" x2="120" y2="112" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1" />
-            <line x1="72" y1="65" x2="168" y2="65" stroke="rgba(124, 58, 237, 0.25)" stroke-width="1" />
-            <circle cx="120" cy="35" r="3" fill="#7c3aed" />
-            <circle cx="150" cy="65" r="3" fill="#7c3aed" />
-            <circle cx="90" cy="65" r="3" fill="#7c3aed" />
-            <circle cx="120" cy="95" r="3" fill="#7c3aed" />
+        <div class="agent-network-stage">
+          <svg class="agent-graph-svg" viewBox="0 0 240 130" fill="none">
+            <path d="M 50 65 L 120 25 L 190 65 L 120 105 Z" stroke="rgba(217, 119, 6, 0.45)" stroke-width="1.5" stroke-dasharray="3 3" />
+            <path d="M 50 65 L 190 65" stroke="rgba(217, 119, 6, 0.25)" stroke-width="1.2" />
+            <line x1="120" y1="25" x2="120" y2="105" stroke="rgba(217, 119, 6, 0.25)" stroke-width="1.2" />
+            <circle r="3.5" fill="#d97706">
+              <animateMotion path="M 50 65 L 120 25 L 190 65 L 120 105 Z" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <g transform="translate(50, 65)">
+              <circle r="14" fill="rgba(217, 119, 6, 0.14)" stroke="#d97706" stroke-width="1.5"/>
+              <text y="3" text-anchor="middle" font-size="7" fill="#d97706" font-family="monospace" font-weight="700">SEC</text>
+            </g>
+            <g transform="translate(120, 25)">
+              <circle r="16" fill="rgba(217, 119, 6, 0.2)" stroke="#d97706" stroke-width="2"/>
+              <text y="3.5" text-anchor="middle" font-size="7.5" fill="#d97706" font-family="monospace" font-weight="700">SWARM</text>
+            </g>
+            <g transform="translate(190, 65)">
+              <circle r="14" fill="rgba(217, 119, 6, 0.14)" stroke="#d97706" stroke-width="1.5"/>
+              <text y="3" text-anchor="middle" font-size="7" fill="#d97706" font-family="monospace" font-weight="700">MKT</text>
+            </g>
+            <g transform="translate(120, 105)">
+              <circle r="14" fill="rgba(217, 119, 6, 0.14)" stroke="#d97706" stroke-width="1.5"/>
+              <text y="3" text-anchor="middle" font-size="7" fill="#d97706" font-family="monospace" font-weight="700">RISK</text>
+            </g>
           </svg>
         </div>
         <div class="terminal-hud-pill hud-pill-status">
-          <span class="hud-status-dot pulse-violet"></span>
-          <span>TELEMETRY // SOIL PROBE</span>
+          <span class="hud-status-dot pulse-amber"></span>
+          <span>AI SWARM // ACTIVE</span>
         </div>
         <div class="terminal-hud-pill hud-pill-metrics">
-          <span>&lt; 250ms DELAY</span>
+          <span>&lt; 60s LATENCY</span>
           <span class="hud-divider">/</span>
-          <span>-40% WATER LOSS</span>
+          <span>100% SOURCED</span>
         </div>
       </div>
     `;
@@ -451,18 +532,49 @@ class SpatialPortfolioApp {
     `).join('');
   }
 
+  renderCredentials() {
+    const credGrid = document.getElementById('credentials-grid');
+    if (credGrid && profileData.certifications) {
+      credGrid.innerHTML = profileData.certifications.map(c => `
+        <article class="credential-card" data-tilt data-tilt-max="6">
+          <div class="credential-reticle reticle-tl"></div>
+          <div class="credential-reticle reticle-br"></div>
+          <div class="credential-top">
+            <span class="credential-badge-chip">${c.badgeText}</span>
+            <span class="credential-year">${c.year}</span>
+          </div>
+          <h4 class="credential-title">${c.title}</h4>
+          <div class="credential-issuer">${c.issuer} • <span class="credential-track">${c.track}</span></div>
+          <p class="credential-desc">${c.description}</p>
+        </article>
+      `).join('');
+    }
+
+    const eduGrid = document.getElementById('education-cards-grid');
+    if (eduGrid && profileData.education) {
+      eduGrid.innerHTML = profileData.education.map(e => `
+        <div class="education-card">
+          <div class="education-period">${e.period}</div>
+          <h4 class="education-inst">${e.institution}</h4>
+          <div class="education-deg">${e.degree} — <strong class="education-grade">${e.grade}</strong></div>
+          <p class="education-highlights">${e.highlights}</p>
+        </div>
+      `).join('');
+    }
+  }
+
   renderPresenceHub() {
     const grid = document.getElementById('presence-grid');
     if (!grid || !profileData.presenceHub) return;
 
     const { github, linkedin, leetcode, codolio } = profileData.presenceHub;
 
-    // Generate random realistic heatmap cells for GitHub
+    // Generate random realistic contribution heatmap cells
     const heatmapLevels = ['', 'lvl-1', 'lvl-2', 'lvl-3', '', 'lvl-1', 'lvl-2', '', 'lvl-1'];
     let heatmapHtml = '';
     for (let i = 0; i < 60; i++) {
       const lvl = heatmapLevels[Math.floor(Math.random() * heatmapLevels.length)];
-      heatmapHtml += `<div class="heatmap-cell ${lvl}" title="Activity node #${i + 1}"></div>`;
+      heatmapHtml += `<div class="heatmap-cell ${lvl}" title="Contribution node #${i + 1}"></div>`;
     }
 
     grid.innerHTML = `
@@ -534,7 +646,7 @@ class SpatialPortfolioApp {
         </a>
       </article>
 
-      <!-- 2. LeetCode Problem Solving Card -->
+      <!-- 2. LeetCode Problem Solving Card (200+ Solved, 85-Day Streak, 1440 Rating) -->
       <article class="presence-card" data-tilt data-tilt-max="7">
         <div class="presence-header">
           <div class="presence-identity">
@@ -567,22 +679,20 @@ class SpatialPortfolioApp {
           `).join('')}
         </div>
 
-        <!-- LeetCode Heatmap Matrix -->
+        <!-- LeetCode Heatmap Matrix with 85-Day Streak Active -->
         <div class="leetcode-heatmap-wrap">
           <div class="leetcode-heatmap-label">
-            <span>LeetCode Submission Heatmap</span>
-            <span style="color: #00b8a3; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #00b8a3; display: inline-block;"></span> 63 POTD Streak Active</span>
+            <span>LeetCode Submission Heatmap (303 Submissions)</span>
+            <span style="color: #00b8a3; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #00b8a3; display: inline-block;"></span> 85-Day Streak Active</span>
           </div>
           <div class="leetcode-heatmap-grid">
             ${(() => {
-              // Realistic LeetCode submission density based on active daily streak
               const lcLevels = ['lvl-2', 'lvl-3', 'lvl-1', 'lvl-2', 'lvl-3', 'lvl-3', 'lvl-2', 'lvl-3', 'lvl-1', 'lvl-2'];
               let html = '';
               for (let i = 0; i < 60; i++) {
-                // Highlight continuous trailing streak
-                const isStreakActive = i > 12;
+                const isStreakActive = i > 8;
                 const lvl = isStreakActive ? lcLevels[i % lcLevels.length] : (i % 3 === 0 ? 'lvl-1' : '');
-                html += `<div class="lc-cell ${lvl}" title="Active Day #${i + 1} • POTD Streak"></div>`;
+                html += `<div class="lc-cell ${lvl}" title="Active Day #${i + 1} • POTD Continuous Consistency"></div>`;
               }
               return html;
             })()}
@@ -591,7 +701,7 @@ class SpatialPortfolioApp {
 
         <!-- LeetCode Badges Showcase -->
         <div class="leetcode-badges-wrap">
-          <div class="leetcode-badges-title">Earned LeetCode Badges & Milestones</div>
+          <div class="leetcode-badges-title">Earned LeetCode Badges & Milestones (5 Badges)</div>
           <div class="leetcode-badges-grid">
             ${leetcode.badges ? leetcode.badges.map(b => `
               <div class="leetcode-badge-card" title="${b.name}">
@@ -611,27 +721,46 @@ class SpatialPortfolioApp {
         <div class="leetcode-meter-wrap">
           <div class="leetcode-meter-header">
             <span>Problem Difficulty Spectrum</span>
-            <span>133 Solved / 145 Subs</span>
+            <span>200 Solved / 303 Submissions</span>
           </div>
           <div class="leetcode-bar-track">
-            <div class="leetcode-bar-seg easy" style="width: 52%;" title="Easy: 69 Solved"></div>
-            <div class="leetcode-bar-seg medium" style="width: 35%;" title="Medium: 47 Solved"></div>
-            <div class="leetcode-bar-seg hard" style="width: 13%;" title="Hard: 17 Solved"></div>
+            <div class="leetcode-bar-seg easy" style="width: 45.5%;" title="Easy: 91 Solved"></div>
+            <div class="leetcode-bar-seg medium" style="width: 40.0%;" title="Medium: 80 Solved"></div>
+            <div class="leetcode-bar-seg hard" style="width: 14.5%;" title="Hard: 29 Solved"></div>
           </div>
           <div class="leetcode-diff-chips">
             <div class="leetcode-diff-chip">
               <span class="leetcode-dot easy"></span>
-              <span>Easy: <strong>69</strong></span>
+              <span>Easy: <strong>91</strong> (45.5%)</span>
             </div>
             <div class="leetcode-diff-chip">
               <span class="leetcode-dot medium"></span>
-              <span>Medium: <strong>47</strong></span>
+              <span>Medium: <strong>80</strong> (40.0%)</span>
             </div>
             <div class="leetcode-diff-chip">
               <span class="leetcode-dot hard"></span>
-              <span>Hard: <strong>17</strong></span>
+              <span>Hard: <strong>29</strong> (14.5%)</span>
             </div>
           </div>
+        </div>
+
+        <!-- Public Goals Progress Matrix -->
+        <div class="leetcode-goals-wrap">
+          <div class="leetcode-goals-header">
+            <span>Public Progress Toward Milestones</span>
+            <span class="goals-quote">"Trying to show up everyday."</span>
+          </div>
+          ${leetcode.goals ? leetcode.goals.map(g => `
+            <div class="leetcode-goal-item">
+              <div class="goal-info-row">
+                <span class="goal-name">${g.title}</span>
+                <span class="goal-count"><strong>${g.current}</strong> / ${g.target} (${g.percent}%)</span>
+              </div>
+              <div class="goal-bar-track">
+                <div class="goal-bar-fill" style="width: ${g.percent}%;"></div>
+              </div>
+            </div>
+          `).join('') : ''}
         </div>
 
         <a href="${leetcode.url}" target="_blank" rel="noopener noreferrer" class="presence-cta-btn" data-magnetic data-magnetic-strength="0.2">
@@ -686,7 +815,7 @@ class SpatialPortfolioApp {
             <span style="font-family: var(--font-tech); font-weight: 600; color: #0d9468;">Verified</span>
           </div>
           <div class="codolio-item-pill">
-            <span>DSA & Algorithmic Milestones</span>
+            <span>DSA &amp; Algorithmic Milestones</span>
             <span style="font-family: var(--font-tech); font-weight: 600; color: #7c3aed;">Active Streaks</span>
           </div>
         </div>
@@ -743,7 +872,7 @@ class SpatialPortfolioApp {
         </div>
 
         <div class="endorsements-wrap">
-          <div class="endorsements-label">Featured Endorsements & Expertise</div>
+          <div class="endorsements-label">Top Skills Evidenced on Profile</div>
           <div class="endorsements-pills">
             ${linkedin.endorsements.map(e => `<span class="endorsement-tag">${e}</span>`).join('')}
           </div>
@@ -751,10 +880,10 @@ class SpatialPortfolioApp {
 
         <div style="padding: 1.15rem; background: rgba(0, 0, 0, 0.025); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); margin-bottom: 1.75rem;">
           <div style="font-family: var(--font-editorial); font-size: 1.05rem; font-style: italic; color: var(--text-offwhite); line-height: 1.45;">
-            "Engineering interfaces where aesthetics, computational performance, and human psychology operate in complete harmony."
+            "I CODE THEREFORE I AM"
           </div>
           <div style="font-family: var(--font-tech); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">
-            Saumya Pandya • B.Tech CSE Core @ VIT Chennai
+            Saumya Pandya • B.Tech CSE Core @ VIT Chennai '29 • Open for SDE Internships
           </div>
         </div>
 
@@ -782,6 +911,40 @@ class SpatialPortfolioApp {
         </svg>
       </a>
     `).join('');
+  }
+
+  setupThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+    if (!toggleBtn) return;
+
+    // Load persisted theme preference
+    const savedTheme = localStorage.getItem('saumya_theme');
+    if (savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (sunIcon) sunIcon.style.display = 'none';
+      if (moonIcon) moonIcon.style.display = 'block';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+
+      if (newTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (sunIcon) sunIcon.style.display = 'none';
+        if (moonIcon) moonIcon.style.display = 'block';
+        this.showToast('Theme: Dark & Gold (SoundChain Mode)');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        if (sunIcon) sunIcon.style.display = 'block';
+        if (moonIcon) moonIcon.style.display = 'none';
+        this.showToast('Theme: Warm Alabaster (Editorial Mode)');
+      }
+
+      localStorage.setItem('saumya_theme', newTheme);
+    });
   }
 
   setupThemeAccentSwitcher() {
@@ -835,10 +998,9 @@ class SpatialPortfolioApp {
   }
 
   setupScrollReveal() {
-    // Add .reveal to children of section headers and cards for staggered entrance
     const revealTargets = document.querySelectorAll(
       '.section-header, .project-card-3d, .capability-card, .principle-card, ' +
-      '.timeline-card, .presence-card, .about-lead-card, .about-editorial-photo-card, ' +
+      '.timeline-card, .presence-card, .credential-card, .education-card, .about-lead-card, .about-editorial-photo-card, ' +
       '.tech-stack-container, .hero-stats-strip'
     );
     revealTargets.forEach(el => el.classList.add('reveal'));
@@ -846,7 +1008,6 @@ class SpatialPortfolioApp {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          // Stagger siblings slightly
           const siblings = entry.target.parentElement
             ? Array.from(entry.target.parentElement.children).filter(c => c.classList.contains('reveal'))
             : [];
@@ -986,8 +1147,7 @@ class SpatialPortfolioApp {
     });
 
     if (printBtn) {
-      printBtn.addEventListener('click', (e) => {
-        // Native anchor download executes; provide friendly feedback
+      printBtn.addEventListener('click', () => {
         this.showToast('Downloading Saumya_Pandya_Resume.pdf...');
       });
     }
@@ -999,15 +1159,15 @@ class SpatialPortfolioApp {
         <header class="cv-header">
           <div class="cv-header-left">
             <h1 class="cv-name">Saumya Pandya</h1>
-            <div class="cv-sub">2nd Year CSE (Core) Undergraduate | VIT Chennai</div>
+            <div class="cv-sub">CSE @ VIT Chennai '29 | Full-Stack Developer | Applied AI &amp; Blockchain Enthusiast</div>
           </div>
           <div class="cv-header-right">
-            <div><a href="mailto:saumyapandyaartist@gmail.com" class="cv-contact-link">Email</a></div>
+            <div><a href="mailto:saumyapandyaartist@gmail.com" class="cv-contact-link">saumyapandyaartist@gmail.com</a></div>
             <div><a href="tel:+917984641399" class="cv-contact-link">+91-7984641399</a></div>
             <div><a href="https://www.linkedin.com/in/saumya-pandya-5a0376369" target="_blank" rel="noopener noreferrer" class="cv-contact-link">LinkedIn</a></div>
             <div><a href="https://github.com/SAMJOD07-devz" target="_blank" rel="noopener noreferrer" class="cv-contact-link">GitHub</a></div>
-            <div><a href="https://leetcode.com/u/SAUMYA_PANDYA2207/" target="_blank" rel="noopener noreferrer" class="cv-contact-link">LeetCode</a></div>
-            <div><a href="https://samjod07-devz.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="cv-contact-link">Portfolio</a></div>
+            <div><a href="https://leetcode.com/u/SAUMYA_PANDYA2207/" target="_blank" rel="noopener noreferrer" class="cv-contact-link">LeetCode (200+)</a></div>
+            <div><a href="https://samjod07-devz.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="cv-contact-link">Portfolio Website</a></div>
           </div>
         </header>
 
@@ -1017,38 +1177,106 @@ class SpatialPortfolioApp {
         <section class="cv-section">
           <div class="cv-section-title"><span class="cv-bullet-rect"></span>Education</div>
           <div class="cv-row">
-            <div class="cv-col-date">July 2025 – May 2029</div>
+            <div class="cv-col-date">Jun 2025 – Jul 2029</div>
             <div class="cv-col-content">
-              <div class="cv-item-title"><strong>B.Tech, Computer Science &amp; Engineering (CSE Core)</strong>, VIT Chennai, <strong>CGPA: 8.53</strong></div>
-              <div class="cv-item-desc">Currently in 2nd year; School of Computer Science.</div>
+              <div class="cv-item-title"><strong>B.Tech, Computer Science &amp; Engineering (CSE Core)</strong>, Vellore Institute of Technology (VIT Chennai), <strong>CGPA: 8.53</strong></div>
+              <div class="cv-item-desc">2nd Year Core; School of Computer Science. Coursework: Advanced Data Structures, Database Systems (SQL), Operating Systems, Object-Oriented Software Design.</div>
+            </div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-col-date">Jun 2022 – May 2023</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title"><strong>Higher Secondary Certificate (Class 12)</strong>, Shree P.V. Modi School, <strong>Grade A (93%)</strong></div>
+              <div class="cv-item-desc">Science Stream; Mathematics, Physics &amp; Computer Science fundamentals.</div>
             </div>
           </div>
         </section>
 
-        <!-- Roles & Involvement -->
+        <!-- Roles & Cohorts -->
         <section class="cv-section">
-          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Roles &amp; Involvement</div>
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Roles &amp; Involvements</div>
           <div class="cv-row">
-            <div class="cv-col-date">2025–Present</div>
+            <div class="cv-col-date">Sep 2026 – Present</div>
             <div class="cv-col-content">
-              <div class="cv-item-title"><strong>Development Member</strong>, <em>Microsoft Innovations Club (MIC), VIT Chennai</em></div>
-              <div class="cv-item-desc">Contribute to full-stack tools and campus-facing software built by the club.</div>
+              <div class="cv-item-title"><strong>Development Member</strong>, <em>Microsoft Innovations Club (MIC) @ VIT Chennai</em></div>
+              <div class="cv-item-desc">Engineered campus event platforms, including OrbitCheck QR pass scanner &amp; live database syncing adopted for campus summits.</div>
             </div>
           </div>
           <div class="cv-row">
-            <div class="cv-col-date">2026</div>
+            <div class="cv-col-date">May 2026 – Aug 2026</div>
             <div class="cv-col-content">
-              <div class="cv-item-title"><strong>Development Member</strong>, <em>GirlScript Summer of Code (GSSoC) 2026</em></div>
-              <div class="cv-item-desc">Open-source contributor across community projects.</div>
+              <div class="cv-item-title"><strong>Open Source Contributor</strong>, <em>GirlScript Summer of Code (GSSoC 2026)</em></div>
+              <div class="cv-item-desc">Selected among 35,000+ applicants (official GSSoC 2026 Contributor badge). Contributed across community open-source repositories.</div>
             </div>
           </div>
         </section>
 
         <!-- Projects -->
         <section class="cv-section">
-          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Projects</div>
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Key Projects</div>
 
-          <!-- Project 1: OrbitCheck -->
+          <!-- AIMS -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">Jul – Nov 2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>AIMS — Autonomous Inventory &amp; Demand Intelligence Platform</strong>, <span class="cv-badge-cat">Full-Stack &amp; Applied ML</span>
+                <span class="cv-links-group">
+                  <a href="https://github.com/SAMJOD07-devz" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">Full-stack inventory management system combining a 3NF normalized relational database with machine learning for demand forecasting and automated replenishment.</div>
+              <ul class="cv-bullet-list">
+                <li>Designed a 3NF schema with 11 entities, foreign keys, cascade rules, and CHECK constraints with double-entry ledger semantics.</li>
+                <li>Built SQL views for aggregations and a trigger (<code>trg_stock_level_alert</code>) automatically dispatching reorder alerts.</li>
+                <li>Queried 913,000 real sales records (Kaggle dataset); integrated scikit-learn regression for forecasting and K-Means ABC clustering.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> SQL, 3NF Database Design, Scikit-Learn, K-Means, React, PostgreSQL, Docker</div>
+            </div>
+          </div>
+
+          <!-- SoundChain -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">Jul – Oct 2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>SoundChain — Blockchain Music Royalty Platform</strong>, <span class="cv-badge-cat">Blockchain &amp; Web3</span>
+                <span class="cv-links-group">
+                  <a href="https://github.com/SAMJOD07-devz/SoundChain-Blockchain" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">Ethereum-based music royalty settlement platform automating splits via Solidity smart contracts and 10,000 BPS revenue distribution.</div>
+              <ul class="cv-bullet-list">
+                <li>Authored Solidity 0.8.20 smart contracts supporting instant dual payouts in ETH and USDC stablecoin.</li>
+                <li>Built a Listen-to-Earn ERC-20 utility token ($LSTN) with ECDSA signature verification, anti-bot replay protection, and capped supply.</li>
+                <li>Integrated 3D vinyl visualizer in Three.js/React Three Fiber with Web Audio API, IndexedDB storage, and 18 passing Hardhat tests.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> Solidity 0.8.20, Ethereum, Hardhat, React 18, Ethers.js v6, Three.js / R3F, Web Audio API, IndexedDB</div>
+            </div>
+          </div>
+
+          <!-- iNHV -->
+          <div class="cv-row cv-project-row">
+            <div class="cv-col-date">2026</div>
+            <div class="cv-col-content">
+              <div class="cv-item-title">
+                <strong>iNHV — Indian National Health Vault</strong>, <span class="cv-badge-cat">Applied AI &amp; Healthcare</span>
+                <span class="cv-links-group">
+                  <a href="https://national-health-vault-mu.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+                  <a href="https://github.com/SAMJOD07-devz/National-Health-Vault" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </span>
+              </div>
+              <div class="cv-item-summary">Aadhaar-verified medical records architecture developed for Google Gemma Hackathon ('Intelligence with Purpose' track; Google Participation Certificate).</div>
+              <ul class="cv-bullet-list">
+                <li>Integrated Google Gemma 4 function calling to extract diagnosis, medication, and dosage from unstructured doctor notes.</li>
+                <li>Built AI-driven safety cross-checks against patient allergy histories and drug interactions before record commit.</li>
+                <li>Deployed RAG chatbot allowing patients to query verified history in plain language with strict clinical decision-support boundaries.</li>
+              </ul>
+              <div class="cv-stack-line"><strong>Stack:</strong> Google Gemma 4, Function Calling, Clinical RAG, Healthcare AI, TypeScript, SQL, AES-256</div>
+            </div>
+          </div>
+
+          <!-- OrbitCheck -->
           <div class="cv-row cv-project-row">
             <div class="cv-col-date">2026</div>
             <div class="cv-col-content">
@@ -1059,71 +1287,23 @@ class SpatialPortfolioApp {
                   <a href="https://github.com/SAMJOD07-devz/MIC-PROJECT" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                 </span>
               </div>
-              <div class="cv-item-summary">Real-time campus event operating system and automated gate check-in platform, built for MIC and VIT Chennai.</div>
+              <div class="cv-item-summary">Real-time campus event operating system and automated gate check-in platform engineered for Microsoft Innovations Club (MIC) @ VIT Chennai.</div>
               <ul class="cv-bullet-list">
                 <li>Engineered an automated webcam frame scanner using client-side canvas decoding with real-time database state synchronization.</li>
-                <li>Achieved sub-2-second check-in speed, 3-second live metrics sync, and cryptographically signed 2D QR passes to prevent duplicate entries.</li>
-                <li>Adopted by MIC at VIT Chennai for its digital entry management workflow.</li>
+                <li>Achieved sub-2-second check-in speed, 3-second live metrics sync, and cryptographically signed 2D QR passes.</li>
               </ul>
               <div class="cv-stack-line"><strong>Stack:</strong> TypeScript, React/Next.js, Webcam QR Scanner, SQL, Real-Time Sync</div>
             </div>
           </div>
+        </section>
 
-          <!-- Project 2: Multi-Agent -->
-          <div class="cv-row cv-project-row">
-            <div class="cv-col-date">2026</div>
+        <!-- Competitive Programming & Stats -->
+        <section class="cv-section">
+          <div class="cv-section-title"><span class="cv-bullet-rect"></span>Competitive Programming &amp; Coding Consistency</div>
+          <div class="cv-row">
+            <div class="cv-col-date">LeetCode Track</div>
             <div class="cv-col-content">
-              <div class="cv-item-title">
-                <strong>Multi-Agent Autonomous Financial Intelligence</strong>, <span class="cv-badge-cat">Autonomous AI &amp; Systems</span>
-                <span class="cv-links-group">
-                  <a href="https://github.com/SAMJOD07-devz/Multi-Agent-Autonomous-Financial-Intelligence-System" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-                </span>
-              </div>
-              <div class="cv-item-summary">A collaborative swarm of autonomous AI agents delivering fully cited financial intelligence in under 60 seconds.</div>
-              <ul class="cv-bullet-list">
-                <li>Built specialized agents for real-time news extraction, quantitative parsing, and risk modeling.</li>
-                <li>Delivered comprehensive, 100% source-cited financial dossiers with complete transparency.</li>
-              </ul>
-              <div class="cv-stack-line"><strong>Stack:</strong> Python, Multi-Agent AI, LLM Orchestration, Market APIs, Data Pipelines</div>
-            </div>
-          </div>
-
-          <!-- Project 3: National Health Vault -->
-          <div class="cv-row cv-project-row">
-            <div class="cv-col-date">2026</div>
-            <div class="cv-col-content">
-              <div class="cv-item-title">
-                <strong>National Health Vault</strong>, <span class="cv-badge-cat">Secure Systems &amp; Backend</span>
-                <span class="cv-links-group">
-                  <a href="https://national-health-vault-mu.vercel.app/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
-                  <a href="https://github.com/SAMJOD07-devz/National-Health-Vault" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-                </span>
-              </div>
-              <div class="cv-item-summary">Secure, centralized healthcare records management and digital vault architecture.</div>
-              <ul class="cv-bullet-list">
-                <li>Engineered an encrypted, role-based access vault with relational database design and patient dashboards.</li>
-                <li>Delivered a modular, OOP-based backend with AES encryption and 100% data integrity.</li>
-              </ul>
-              <div class="cv-stack-line"><strong>Stack:</strong> TypeScript, SQL, AES Security, Backend REST API</div>
-            </div>
-          </div>
-
-          <!-- Project 4: Smart Irrigation IoT System -->
-          <div class="cv-row cv-project-row">
-            <div class="cv-col-date">2025</div>
-            <div class="cv-col-content">
-              <div class="cv-item-title">
-                <strong>Smart Irrigation IoT System</strong>, <span class="cv-badge-cat">IoT &amp; Embedded Systems</span>
-                <span class="cv-links-group">
-                  <a href="https://github.com/SAMJOD07-devz/smart-irrigation-system-iot" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-                </span>
-              </div>
-              <div class="cv-item-summary">Automated, telemetry-driven soil moisture monitoring and precision water management system.</div>
-              <ul class="cv-bullet-list">
-                <li>Built a microcontroller-based feedback loop in C/C++ integrating soil probes and automated solenoid valves.</li>
-                <li>Achieved a 40% efficiency gain in water usage with under 250ms telemetry delay; showcased at the university IoT exhibition.</li>
-              </ul>
-              <div class="cv-stack-line"><strong>Stack:</strong> C/C++, IoT Sensors, Embedded Systems, Telemetry, Algorithms</div>
+              <div class="cv-item-desc"><strong>200+ Problems Solved</strong> (91 Easy, 80 Medium, 29 Hard) • <strong>1,440 Contest Rating</strong> (4 Contests) • <strong>85-Day Max Continuous Streak</strong> • 129 Active Days • 303 Submissions in Past Year • <strong>5 Badges</strong> (including 100 Days Badge 2026 &amp; DCC August 2026 Badge).</div>
             </div>
           </div>
         </section>
@@ -1133,11 +1313,19 @@ class SpatialPortfolioApp {
           <div class="cv-section-title"><span class="cv-bullet-rect"></span>Technical Skills</div>
           <div class="cv-row cv-skills-row">
             <div class="cv-col-date cv-skill-label">Languages</div>
-            <div class="cv-col-content cv-skill-val">C/C++, Java (OOP), Python, SQL</div>
+            <div class="cv-col-content cv-skill-val">Python, C, C++, JavaScript (ES6+ / Vanilla), SQL, Solidity 0.8.20, Java (OOPs)</div>
           </div>
           <div class="cv-row cv-skills-row">
-            <div class="cv-col-date cv-skill-label">Domains</div>
-            <div class="cv-col-content cv-skill-val">Frontend (React, TypeScript), Backend (Node.js, REST APIs), OOP &amp; DSA, Blockchain &amp; Web3</div>
+            <div class="cv-col-date cv-skill-label">Frontend</div>
+            <div class="cv-col-content cv-skill-val">React.js (React 18), Vite, Tailwind CSS, Three.js, React Three Fiber (R3F), HTML5 Canvas, CSS Design Tokens</div>
+          </div>
+          <div class="cv-row cv-skills-row">
+            <div class="cv-col-date cv-skill-label">Backend &amp; DB</div>
+            <div class="cv-col-content cv-skill-val">SQL (3NF Schema Design, Triggers, Views), PostgreSQL (Supabase), Node.js, Express, REST APIs, JWT, bcrypt, RBAC</div>
+          </div>
+          <div class="cv-row cv-skills-row">
+            <div class="cv-col-date cv-skill-label">AI &amp; Web3</div>
+            <div class="cv-col-content cv-skill-val">Google Gemma 4 Function Calling, Clinical RAG, scikit-learn, K-Means Clustering, Hardhat, Ethers.js v6, MetaMask, Web Audio API, Docker</div>
           </div>
         </section>
       </div>
@@ -1171,15 +1359,15 @@ class SpatialPortfolioApp {
 
         <div style="display: flex; flex-direction: column; gap: 1.25rem; font-size: 0.98rem; line-height: 1.7; color: var(--text-offwhite);">
           <div>
-            <h4 style="font-family: var(--font-tech); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4rem;">The Challenge</h4>
+            <h4 style="font-family: var(--font-tech); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4rem;">The Problem &amp; Context</h4>
             <p style="color: var(--text-muted);">${project.caseStudy.challenge}</p>
           </div>
           <div>
-            <h4 style="font-family: var(--font-tech); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4rem;">Spatial Architecture & Solution</h4>
+            <h4 style="font-family: var(--font-tech); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4rem;">Architecture &amp; Implementation</h4>
             <p style="color: var(--text-muted);">${project.caseStudy.solution}</p>
           </div>
           <div>
-            <h4 style="font-family: var(--font-tech); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4rem;">Key Impact & Outcome</h4>
+            <h4 style="font-family: var(--font-tech); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4rem;">Key Impact &amp; Learnings</h4>
             <p style="color: var(--text-muted);">${project.caseStudy.outcome}</p>
           </div>
         </div>
@@ -1252,7 +1440,6 @@ class SpatialPortfolioApp {
       const mailtoUrl = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
 
       setTimeout(() => {
-        // Trigger mailto link
         const mailLink = document.createElement('a');
         mailLink.href = mailtoUrl;
         mailLink.target = '_blank';
@@ -1304,7 +1491,6 @@ class SpatialPortfolioApp {
       isExiting = true;
       clearTimeout(autoEnterTimer);
 
-      // Force window scroll to top on entry
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
@@ -1324,7 +1510,7 @@ class SpatialPortfolioApp {
       }, 750);
     };
 
-    const typeText = (text, element, speed = 45) => {
+    const typeText = (text, element, speed = 42) => {
       return new Promise((resolve) => {
         let index = 0;
         element.innerHTML = '<span class="cursor-caret">|</span>';
@@ -1359,25 +1545,23 @@ class SpatialPortfolioApp {
       if (isExiting) return;
 
       // Type line 1: "Saumya Pandya welcomes you"
-      await typeText('Saumya Pandya welcomes you', line1El, 46);
+      await typeText('Saumya Pandya welcomes you', line1El, 42);
       if (isExiting) return;
       line1El.innerHTML = 'Saumya Pandya welcomes you';
 
       await new Promise(r => setTimeout(r, 280));
       if (isExiting) return;
 
-      // Type line 2: "ready to explore him?"
-      await typeText('ready to explore him?', line2El, 50);
+      // Type line 2: "I code, therefore I am."
+      await typeText('I code, therefore I am.', line2El, 46);
       if (isExiting) return;
 
       // Reveal action button
       if (actionEl) {
         actionEl.classList.add('visible');
       }
-      // Button stays visible, waiting strictly for user to press Enter or click
     };
 
-    // Run on every reload / page load
     runSequence();
 
     if (enterBtn) {
@@ -1401,7 +1585,6 @@ class SpatialPortfolioApp {
       });
     }
 
-    // Strict keyboard support: Only the 'Enter' key proceeds to the site
     window.addEventListener('keydown', (e) => {
       if (entrance && !entrance.classList.contains('welcome-hidden') && !entrance.classList.contains('welcome-exiting')) {
         if (e.key === 'Enter' || e.code === 'Enter' || e.code === 'NumpadEnter') {

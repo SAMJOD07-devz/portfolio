@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saumya Pandya — Spatial Portfolio | CSE Core @ VIT Chennai</title>
-  <meta name="description" content="Saumya Pandya — 2nd Year Computer Science & Engineering (CSE Core) undergraduate at VIT Chennai. Spatial web architectures, algorithms, and full-stack engineering.">
+  <title>Saumya Pandya — Full-Stack Developer | Applied AI &amp; Blockchain | CSE @ VIT Chennai '29</title>
+  <meta name="description" content="Saumya Pandya — 2nd Year CSE @ VIT Chennai '29. Full-Stack Developer, Applied AI & Blockchain Enthusiast, GSSoC '26 Contributor, MIC Development Member.">
   <meta name="theme-color" content="#f7f6f2">
-  <meta property="og:title" content="Saumya Pandya — Portfolio | CSE Core @ VIT Chennai">
-  <meta property="og:description" content="2nd Year CSE Core student at VIT Chennai crafting high-performance software and spatial web architectures.">
+  <meta property="og:title" content="Saumya Pandya — Portfolio | CSE @ VIT Chennai '29">
+  <meta property="og:description" content="2nd Year CSE student at VIT Chennai crafting full-stack systems, applied AI, and open-source software.">
   <meta property="og:type" content="website">
 
   <!-- Fonts -->
@@ -23,7 +23,6 @@
 
   <!-- Zero-Gravity Particle & Physics Background Canvas -->
   <canvas id="spatial-canvas" aria-hidden="true"></canvas>
-
 
   <!-- ============================================================
        CINEMATIC WELCOME ENTRANCE SCREEN
@@ -81,6 +80,7 @@
       <li class="nav-link-item"><a href="#capabilities">Capabilities</a></li>
       <li class="nav-link-item"><a href="#about">About</a></li>
       <li class="nav-link-item"><a href="#presence">Ecosystem</a></li>
+      <li class="nav-link-item"><a href="#credentials">Honors</a></li>
       <li class="nav-link-item"><a href="#contact">Contact</a></li>
     </ul>
 
@@ -100,6 +100,24 @@
       <button id="replay-intro-btn" class="nav-ctrl-btn" title="Replay Welcome Intro" aria-label="Replay Welcome Intro">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
+        </svg>
+      </button>
+
+      <!-- Dark / Light Theme Toggle -->
+      <button id="theme-toggle-btn" class="nav-ctrl-btn" title="Toggle Dark / Light Theme" aria-label="Toggle Theme Mode">
+        <svg id="theme-icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="theme-icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
 
@@ -127,7 +145,7 @@
         <div class="hero-text-stage">
           <div class="hero-meta-pill" id="hero-status-badge">
             <span class="status-dot-radar"></span>
-            <span id="hero-status-text">2nd Year CSE Core • VIT Chennai • Open for SDE Internships &amp; Collabs</span>
+            <span id="hero-status-text">CSE @ VIT Chennai '29 • Open for SDE Internships, Research &amp; Collabs</span>
           </div>
 
           <h1 class="hero-title" id="hero-personal-name">
@@ -136,8 +154,15 @@
           </h1>
 
           <p class="hero-tagline" id="hero-tagline">
-            Building full-stack architectures, autonomous AI multi-agent systems, and open-source contributions at MIC and GSSoC 2026.
+            Engineering full-stack systems, applied AI, and open-source software.
           </p>
+
+          <!-- Personal Banner Tagline Matching LinkedIn Source -->
+          <div class="hero-motto-strip">
+            <span class="motto-bracket">[</span>
+            <span class="motto-text">I CODE THEREFORE I AM</span>
+            <span class="motto-bracket">]</span>
+          </div>
 
           <div class="hero-actions">
             <a href="#work" class="btn-spatial-primary" data-magnetic data-magnetic-strength="0.2">
@@ -172,11 +197,11 @@
             </div>
             <div class="recruiter-pill">
               <span class="recruiter-tag">CGPA:</span>
-              <span class="recruiter-text">8.53 (VIT Chennai)</span>
+              <span class="recruiter-text">8.53 (VIT Chennai '29)</span>
             </div>
             <div class="recruiter-pill">
               <span class="recruiter-tag">STATUS:</span>
-              <span class="recruiter-text">Open for Internships</span>
+              <span class="recruiter-text">Open to Work (Recruiters)</span>
             </div>
           </div>
         </div>
@@ -194,7 +219,7 @@
             <div class="editorial-portrait-caption">
               <div class="caption-identity">
                 <span class="caption-name">Saumya Pandya</span>
-                <span class="caption-role">VIT Chennai • CSE Core '26</span>
+                <span class="caption-role">VIT Chennai • CSE Core '29</span>
               </div>
               <div class="caption-status">
                 <span class="status-pulse-dot"></span>
@@ -210,7 +235,6 @@
       <div class="hero-stats-strip" id="hero-stats-container">
         <!-- Hydrated dynamically -->
       </div>
-
 
     </section>
 
@@ -248,7 +272,7 @@
       <div class="tech-stack-container">
         <div class="tech-stack-header">
           <h3 class="tech-stack-title">Technologies &amp; Core Toolkit</h3>
-          <span style="font-family: var(--font-tech); font-size: 0.78rem; color: var(--accent);">Modern Frameworks &amp; Languages</span>
+          <span style="font-family: var(--font-tech); font-size: 0.78rem; color: var(--accent);">Modern Frameworks, Web3 &amp; Applied AI</span>
         </div>
         <div class="tech-stack-grid" id="tech-stack-grid">
           <!-- Hydrated dynamically -->
@@ -272,7 +296,7 @@
             <div class="about-telemetry-bar">
               <div class="telemetry-pill">
                 <span class="telemetry-pulse-dot"></span>
-                <span class="telemetry-status-text">VIT CHENNAI // CSE CORE</span>
+                <span class="telemetry-status-text">VIT CHENNAI // CSE CORE '29</span>
               </div>
               <div class="telemetry-live-clock">
                 <span class="telemetry-clock-glyph">⚡</span>
@@ -294,9 +318,9 @@
                 <div class="spec-matrix-body">
                   <div class="spec-title-row">
                     <span class="spec-matrix-title">B.Tech Computer Science &amp; Engineering</span>
-                    <span class="spec-matrix-badge">July 2025 – May 2029</span>
+                    <span class="spec-matrix-badge">2025 – 2029</span>
                   </div>
-                  <span class="spec-matrix-sub">2nd Year Core • VIT Chennai • July 2025 – May 2029</span>
+                  <span class="spec-matrix-sub">2nd Year Core • VIT Chennai • CGPA: 8.53</span>
                 </div>
               </div>
 
@@ -319,14 +343,29 @@
                 <div class="spec-matrix-scanline"></div>
                 <div class="spec-matrix-meta">
                   <span class="spec-matrix-num">03</span>
+                  <span class="spec-matrix-tag">PRIOR EDUCATION</span>
+                </div>
+                <div class="spec-matrix-body">
+                  <div class="spec-title-row">
+                    <span class="spec-matrix-title">Shree P.V. Modi School</span>
+                    <span class="spec-matrix-badge">CLASS 12</span>
+                  </div>
+                  <span class="spec-matrix-sub">Grade A • 93% • Science Stream</span>
+                </div>
+              </div>
+
+              <div class="spec-matrix-row">
+                <div class="spec-matrix-scanline"></div>
+                <div class="spec-matrix-meta">
+                  <span class="spec-matrix-num">04</span>
                   <span class="spec-matrix-tag">ROLES &amp; COHORTS</span>
                 </div>
                 <div class="spec-matrix-body">
                   <div class="spec-title-row">
-                    <span class="spec-matrix-title">Microsoft Innovations Club &amp; GSSoC 2026</span>
+                    <span class="spec-matrix-title">MIC @ VIT Chennai &amp; GSSoC 2026</span>
                     <span class="spec-matrix-badge">ACTIVE DEV</span>
                   </div>
-                  <span class="spec-matrix-sub">Development Member • Open-Source Contributor</span>
+                  <span class="spec-matrix-sub">Development Member • Open Source Contributor (35k+ Applicants)</span>
                 </div>
               </div>
             </div>
@@ -347,10 +386,10 @@
             </div>
             <div class="about-photo-caption">
               <div class="caption-meta-row">
-                <span class="caption-tag">CAMPUS &amp; COMMUNITY</span>
+                <span class="caption-tag">PHILOSOPHY &amp; MOTTO</span>
                 <span class="caption-loc">VIT Chennai</span>
               </div>
-              <span class="caption-quote">"Always curious, shipping real software, and enjoying the journey."</span>
+              <span class="caption-quote">"I code, therefore I am."</span>
             </div>
           </div>
         </div>
@@ -395,6 +434,33 @@
 
       <div class="presence-grid" id="presence-grid">
         <!-- Hydrated dynamically -->
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS & CERTIFICATES SECTION -->
+    <section id="credentials" class="section-wrapper">
+      <div class="section-header">
+        <span class="section-tagline">Verified Milestones</span>
+        <h2 class="section-heading">Certificates <span class="editorial">&amp; Honors</span></h2>
+        <p class="section-subtext">Official hackathon recognitions, competitive programming badges, and community cohort selections.</p>
+      </div>
+
+      <div class="credentials-grid" id="credentials-grid">
+        <!-- Hydrated dynamically from profileData.certifications -->
+      </div>
+
+      <!-- Academic Timeline / Education Matrix -->
+      <div class="education-block-wrapper">
+        <div class="education-header">
+          <div>
+            <h3 class="education-title">Education &amp; Academic Trajectory</h3>
+            <p class="education-sub">Rigorous foundation in computer science theory and engineering practices.</p>
+          </div>
+          <span class="education-tag">School of Computer Science</span>
+        </div>
+        <div class="education-cards-grid" id="education-cards-grid">
+          <!-- Hydrated dynamically from profileData.education -->
+        </div>
       </div>
     </section>
 
@@ -453,7 +519,7 @@
       <!-- Footer -->
       <footer class="spatial-footer">
         <div>© <span id="footer-year">2026</span> Saumya Pandya. All rights reserved.</div>
-        <div class="footer-credits">Crafted with <span>Clean Software Architecture</span> & Editorial Aesthetics.</div>
+        <div class="footer-credits">Crafted with <span>Clean Software Architecture</span> &amp; Zero Bloat.</div>
       </footer>
     </section>
 
