@@ -242,6 +242,7 @@ export const profileData = {
       handle: "in/saumya-pandya",
       url: "https://www.linkedin.com/in/saumya-pandya-5a0376369?utm_source=share_via&utm_content=profile&utm_medium=member_android",
       status: "CSE @ VIT Chennai '29",
+      connections: "463+",
       headline: "CSE @ VIT Chennai '29 | Full-Stack Developer | DSA & Machine Learning | Blockchain Enthusiast | GSSoC '26 Contributor | MIC Development @ VITC",
       bannerQuote: "I CODE THEREFORE I AM",
       stats: [
@@ -249,6 +250,11 @@ export const profileData = {
         { value: "463+", label: "Connections" },
         { value: "2nd Yr", label: "B.Tech CSE" },
         { value: "Open", label: "To Work" }
+      ],
+      recentPosts: [
+        { date: "Oct 2026", title: "Joined MIC as Development Member @ VIT Chennai", engagement: "Campus Innovation" },
+        { date: "Aug 2026", title: "Completed 31/31 LeetCode Daily Challenge Badge (incl. Hard)", engagement: "Consistency" },
+        { date: "Jul 2026", title: "SoundChain Web3 Royalty Settlement Protocol Published", engagement: "Smart Contracts" }
       ],
       endorsements: [
         "Python", "Web Development", "C / C++", "React.js", "SQL & Database Design", "Blockchain & Solidity", "Machine Learning"
