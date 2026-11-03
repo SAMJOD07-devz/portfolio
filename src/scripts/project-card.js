@@ -317,44 +317,42 @@ export function renderProjectCard(p, options = {}) {
     `;
   }
 
-  // Default Grid / Carousel Card View
+  // Default Grid / Carousel Card View - Sleek, High-End Card
   return `
-    <article class="project-card-3d ${isCarousel ? 'carousel-card' : ''}" data-tilt data-tilt-max="4" data-project-id="${p.id}" tabindex="0" role="article" aria-label="${p.title}">
+    <article class="project-card-3d ${isCarousel ? 'carousel-card' : ''}" data-tilt data-tilt-max="2.5" data-project-id="${p.id}" tabindex="0" role="article" aria-label="${p.title}">
       <div class="project-card-glare"></div>
-      <div class="project-preview-frame">
-        <div class="browser-frame-mockup">
-          <div class="browser-frame-bar">
-            <span class="browser-dot dot-red"></span>
-            <span class="browser-dot dot-yellow"></span>
-            <span class="browser-dot dot-green"></span>
-            <span class="browser-url-pill">${p.id}.vitc.internal</span>
+
+      <!-- Sleek Modern Media Stage -->
+      <div class="project-media-stage">
+        <div class="project-media-topbar">
+          <div class="project-media-cat">
+            <span class="media-cat-dot" style="background: ${p.accentColor || 'var(--accent)'}; box-shadow: 0 0 6px ${p.accentColor || 'var(--accent)'};"></span>
+            <span>${p.category}</span>
           </div>
-          <div class="browser-frame-content">
-            ${p.thumbnail ? `
-              <img src="${p.thumbnail}" 
-                   alt="${p.title} Preview" 
-                   class="project-screenshot-img" 
-                   loading="lazy" 
-                   width="640" 
-                   height="400" 
-                   onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-            ` : ''}
-            <div class="project-dynamic-canvas ${p.thumbnail ? 'has-screenshot-fallback' : ''}" style="${p.thumbnail ? 'display: none;' : ''}">
-              ${getProjectGraphic(p)}
-            </div>
-          </div>
+          <span class="project-media-year">${p.year}</span>
         </div>
-        <span class="project-badge-corner" style="color: ${p.accentColor}">${p.category}</span>
-        <span class="project-year-corner">${p.year}</span>
+        <div class="project-media-canvas">
+          ${p.thumbnail ? `
+            <img src="${p.thumbnail}" 
+                 alt="${p.title} Preview" 
+                 class="project-screenshot-img" 
+                 loading="lazy" 
+                 width="640" 
+                 height="360" />
+          ` : getProjectGraphic(p)}
+        </div>
       </div>
 
+      <!-- Card Content Body with Ample Breathing Room -->
       <div class="project-content-body">
         <div class="project-title-row">
           <h3 class="project-card-title">${p.title}</h3>
-          <svg class="project-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="17" x2="17" y2="7"></line>
-            <polyline points="7 7 17 7 17 17"></polyline>
-          </svg>
+          <span class="project-card-arrow-wrap">
+            <svg class="project-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </span>
         </div>
 
         ${p.impact ? `
@@ -376,14 +374,14 @@ export function renderProjectCard(p, options = {}) {
         <div class="project-card-actions">
           ${p.liveUrl && p.liveUrl !== '#' ? `
             <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="card-action-btn live-action" onclick="event.stopPropagation();" aria-label="Launch Live App for ${p.title}">
-              <span>Live App</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Live Demo</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
           ` : ''}
           ${p.githubUrl ? `
             <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="card-action-btn code-action" onclick="event.stopPropagation();" aria-label="View Source on GitHub for ${p.title}">
-              <span>GitHub</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>Code</span>
             </a>
           ` : ''}
           <button type="button" class="card-action-hint" data-action="case-study" data-project-id="${p.id}" aria-label="Read Case Study for ${p.title}">

@@ -1071,12 +1071,31 @@ class SpatialPortfolioApp {
   setupCardGlowEffect() {
     const cards = document.querySelectorAll('.project-card-3d, .presence-card, .capability-card, .timeline-card, .editorial-portrait-card');
     cards.forEach(card => {
+      let rect = null;
+      let ticking = false;
+
+      card.addEventListener('pointerenter', () => {
+        rect = card.getBoundingClientRect();
+      });
+
       card.addEventListener('pointermove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
+        if (!rect) rect = card.getBoundingClientRect();
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            if (rect) {
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+              card.style.setProperty('--mouse-x', `${x}px`);
+              card.style.setProperty('--mouse-y', `${y}px`);
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      card.addEventListener('pointerleave', () => {
+        rect = null;
       });
     });
   }
@@ -1694,15 +1713,13 @@ class SpatialPortfolioApp {
     const skipBtn = document.getElementById('welcome-skip-btn');
     const replayBtn = document.getElementById('replay-intro-btn');
 
-    if (!entrance || !line1El || !line2El) return;
+    if (!entrance) return;
 
-    // Show entrance only once per session to reduce friction
-    const hasSeenWelcome = sessionStorage.getItem('portfolio_welcome_seen');
-    if (hasSeenWelcome) {
-      entrance.classList.add('welcome-hidden');
-      document.body.style.overflow = '';
-      return;
-    }
+    // By default, ensure entrance is completely hidden so page loads immediately
+    entrance.classList.add('welcome-hidden');
+    document.body.style.overflow = '';
+
+    if (!line1El || !line2El) return;
 
     let autoEnterTimer = null;
     let isExiting = false;
@@ -1711,32 +1728,19 @@ class SpatialPortfolioApp {
       if (isExiting) return;
       isExiting = true;
       clearTimeout(autoEnterTimer);
-      sessionStorage.setItem('portfolio_welcome_seen', 'true');
-
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-
       entrance.classList.add('welcome-exiting');
       document.body.style.overflow = '';
 
       setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
         entrance.classList.add('welcome-hidden');
         entrance.classList.remove('welcome-exiting');
-        if (this.tiltEngine) {
-          this.tiltEngine.init();
-        }
-      }, 750);
+      }, 400);
     };
 
-    const typeText = (text, element, speed = 42) => {
+    const typeText = (text, element, speed = 36) => {
       return new Promise((resolve) => {
         let index = 0;
         element.innerHTML = '<span class="cursor-caret">|</span>';
-
         const interval = setInterval(() => {
           if (index < text.length) {
             const current = text.substring(0, index + 1);
@@ -1753,75 +1757,47 @@ class SpatialPortfolioApp {
     const runSequence = async () => {
       isExiting = false;
       clearTimeout(autoEnterTimer);
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
       entrance.classList.remove('welcome-hidden', 'welcome-exiting');
       document.body.style.overflow = 'hidden';
       line1El.innerHTML = '';
       line2El.innerHTML = '';
       if (actionEl) actionEl.classList.remove('visible');
 
-      // Brief pause before typing
-      await new Promise(r => setTimeout(r, 400));
+      await new Promise(r => setTimeout(r, 200));
       if (isExiting) return;
 
-      // Type line 1: "Saumya Pandya welcomes you"
-      await typeText('Saumya Pandya welcomes you', line1El, 42);
+      await typeText('Saumya Pandya welcomes you', line1El, 38);
       if (isExiting) return;
       line1El.innerHTML = 'Saumya Pandya welcomes you';
 
-      await new Promise(r => setTimeout(r, 280));
+      await new Promise(r => setTimeout(r, 200));
       if (isExiting) return;
 
-      // Type line 2: "I code, therefore I am."
-      await typeText('I code, therefore I am.', line2El, 46);
+      await typeText('I code, therefore I am.', line2El, 40);
       if (isExiting) return;
 
-      // Reveal action button
-      if (actionEl) {
-        actionEl.classList.add('visible');
-      }
-      autoEnterTimer = setTimeout(() => {
-        closeEntrance();
-      }, 3500);
+      if (actionEl) actionEl.classList.add('visible');
+      autoEnterTimer = setTimeout(closeEntrance, 3000);
     };
 
-    if (enterBtn) {
-      enterBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeEntrance();
-      });
-    }
-
-    if (skipBtn) {
-      skipBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeEntrance();
-      });
-    }
-
-    entrance.addEventListener('click', () => {
-      closeEntrance();
-    });
+    if (enterBtn) enterBtn.addEventListener('click', (e) => { e.stopPropagation(); closeEntrance(); });
+    if (skipBtn) skipBtn.addEventListener('click', (e) => { e.stopPropagation(); closeEntrance(); });
+    entrance.addEventListener('click', closeEntrance);
 
     if (replayBtn) {
       replayBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        window.scrollTo({ top: 0, behavior: 'instant' });
         runSequence();
       });
     }
 
     window.addEventListener('keydown', (e) => {
-      if (entrance && !entrance.classList.contains('welcome-hidden') && !entrance.classList.contains('welcome-exiting')) {
-        if (e.key === 'Enter' || e.code === 'Enter' || e.code === 'NumpadEnter' || e.key === 'Escape' || e.code === 'Space') {
+      if (entrance && !entrance.classList.contains('welcome-hidden')) {
+        if (e.key === 'Enter' || e.key === 'Escape' || e.code === 'Space') {
           closeEntrance();
         }
       }
     });
-
-    runSequence();
   }
 }
 

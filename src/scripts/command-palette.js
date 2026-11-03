@@ -169,8 +169,21 @@ export class CommandPalette {
     this.bindEvents();
   }
 
+  isMac() {
+    return /Mac|iPhone|iPod|iPad/i.test(navigator.platform || navigator.userAgent);
+  }
+
   createDom() {
     if (document.getElementById('cmd-palette-modal')) return;
+
+    const isMac = this.isMac();
+    const modifierKey = isMac ? '⌘' : 'Ctrl';
+
+    // Update nav button badge to match user OS
+    const triggerBadge = document.querySelector('.cmd-kbd-badge');
+    if (triggerBadge) {
+      triggerBadge.textContent = isMac ? '⌘K' : 'Ctrl K';
+    }
 
     const modal = document.createElement('div');
     modal.id = 'cmd-palette-modal';
@@ -186,14 +199,14 @@ export class CommandPalette {
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="cmd-palette-input" class="cmd-search-input" placeholder="Type a command or section name..." autocomplete="off" spellcheck="false" aria-label="Command query" />
+          <input type="text" id="cmd-palette-input" class="cmd-search-input" placeholder="Type a command or jump to section..." autocomplete="off" spellcheck="false" aria-label="Command query" />
           <span class="cmd-esc-tag">ESC</span>
         </div>
         <div id="cmd-results-list" class="cmd-results-list" role="listbox"></div>
         <div class="cmd-footer-bar">
           <span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span>
           <span><kbd>↵</kbd> select</span>
-          <span><kbd>ESC</kbd> close</span>
+          <span><kbd>${modifierKey}</kbd> + <kbd>K</kbd> toggle</span>
         </div>
       </div>
     `;
@@ -202,9 +215,12 @@ export class CommandPalette {
   }
 
   bindEvents() {
-    // Keyboard shortcuts (Cmd+K / Ctrl+K)
+    const isMac = this.isMac();
+
+    // Keyboard shortcuts (Cmd+K on macOS, Ctrl+K on Windows/Linux)
     window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+      const isCmdOrCtrlK = (isMac ? e.metaKey : e.ctrlKey) && (e.key === 'k' || e.key === 'K');
+      if (isCmdOrCtrlK || (e.ctrlKey && (e.key === 'k' || e.key === 'K'))) {
         e.preventDefault();
         this.toggle();
       } else if (e.key === 'Escape' && this.isOpen) {

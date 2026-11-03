@@ -46,14 +46,15 @@ export class TiltParallaxEngine {
       let targetRotY = 0;
       let curRotX = 0;
       let curRotY = 0;
+      let cardRect = null;
 
-      // Cap max tilt to ~4 degrees to prevent clipping and nav collisions
-      const rawMax = parseFloat(card.getAttribute('data-tilt-max')) || 4;
-      const maxTilt = Math.min(rawMax, 4);
+      // Cap max tilt to subtle 2.5 degrees for buttery-smooth premium feel
+      const rawMax = parseFloat(card.getAttribute('data-tilt-max')) || 2.5;
+      const maxTilt = Math.min(rawMax, 2.5);
 
       const updateCard = () => {
-        curRotX += (targetRotX - curRotX) * 0.12;
-        curRotY += (targetRotY - curRotY) * 0.12;
+        curRotX += (targetRotX - curRotX) * 0.15;
+        curRotY += (targetRotY - curRotY) * 0.15;
 
         if (isHovered || Math.abs(targetRotX - curRotX) > 0.05 || Math.abs(targetRotY - curRotY) > 0.05) {
           card.style.transform = `rotateX(${curRotX.toFixed(2)}deg) rotateY(${curRotY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
@@ -65,21 +66,22 @@ export class TiltParallaxEngine {
 
       card.addEventListener('mouseenter', () => {
         isHovered = true;
+        cardRect = card.getBoundingClientRect();
         if (reqId) cancelAnimationFrame(reqId);
         reqId = requestAnimationFrame(updateCard);
       });
 
       card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        if (!cardRect) cardRect = card.getBoundingClientRect();
+        const x = e.clientX - cardRect.left;
+        const y = e.clientY - cardRect.top;
 
         // Set CSS custom property for specular glare
-        card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-        card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+        card.style.setProperty('--mouse-x', `${(x / cardRect.width) * 100}%`);
+        card.style.setProperty('--mouse-y', `${(y / cardRect.height) * 100}%`);
 
-        const normX = (x / rect.width) * 2 - 1;
-        const normY = (y / rect.height) * 2 - 1;
+        const normX = (x / cardRect.width) * 2 - 1;
+        const normY = (y / cardRect.height) * 2 - 1;
 
         targetRotX = -normY * maxTilt;
         targetRotY = normX * maxTilt;
@@ -87,6 +89,7 @@ export class TiltParallaxEngine {
 
       card.addEventListener('mouseleave', () => {
         isHovered = false;
+        cardRect = null;
         targetRotX = 0;
         targetRotY = 0;
       });

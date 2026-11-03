@@ -13,7 +13,7 @@ export const projectsData = [
     tagline: "A full-stack inventory management system combining a 3NF normalized relational database with machine learning for demand forecasting and automated replenishment.",
     description: "Designed a 3NF schema with 11 entities, foreign keys, cascade rules, and CHECK constraints. Implemented double-entry ledger semantics for auditable stock movements and SQL views with a stock alert trigger (trg_stock_level_alert). Tested against 913,000 real sales records (Kaggle Store Item Demand dataset). Features scikit-learn regression forecasting, K-Means (K=3) ABC clustering, safety stock calculations, and an interactive B2B dashboard with role-based access control.",
     impact: "Simulated 913k+ transactions with zero ledger drift and automated safety-stock alerts.",
-    thumbnail: "./assets/projects/aims-preview.webp", // [PLACEHOLDER: Mockup WebP slot]
+    thumbnail: null, // Drop screenshot here when ready
     thumbnailFallback: "aims", // uses interactive vector graphic fallback
     tech: ["SQL", "Database Design", "Scikit-Learn", "K-Means", "React", "PostgreSQL", "Docker"],
     tags: ["SQL", "Database Design", "Scikit-Learn", "K-Means", "React", "PostgreSQL", "Docker"],
@@ -42,7 +42,7 @@ export const projectsData = [
     tagline: "Every stream, split the moment it's paid — Ethereum royalty settlement protocol.",
     description: "An Ethereum-based music platform designed to make royalty distribution transparent and automated. Smart contracts split payments among artists, producers, and songwriters using a 10,000 Basis Points (BPS) system in ETH and USDC. Features Listen-to-Earn ERC-20 utility token ($LSTN) with ECDSA signatures, replay protection, and anti-bot verification, alongside a 3D vinyl visualizer built with Three.js and React Three Fiber powered by the Web Audio API.",
     impact: "18 passing Hardhat unit tests with instant BPS splits in ETH/USDC.",
-    thumbnail: "./assets/projects/soundchain-preview.webp", // [PLACEHOLDER: Mockup WebP slot]
+    thumbnail: null, // Drop screenshot here when ready
     thumbnailFallback: "soundchain",
     tech: ["Solidity 0.8.20", "Ethereum", "Hardhat", "React 18", "Ethers.js v6", "Three.js / R3F", "Web Audio API", "IndexedDB"],
     tags: ["Solidity 0.8.20", "Ethereum", "Hardhat", "React 18", "Ethers.js v6", "Three.js / R3F", "Web Audio API", "IndexedDB"],
@@ -71,7 +71,7 @@ export const projectsData = [
     tagline: "Sovereign, patient-owned health records powered by Google Gemma 4 AI function calling.",
     description: "A centralized digital health repository designed for India's healthcare ecosystem. Implemented Google Gemma 4 with structured function calling to extract clinical parameters from unstructured doctor notes and lab reports. Features clinical RAG for multi-document patient history summarization, Aadhaar-derived cryptographic patient identifiers, and AES-256 encrypted emergency data access.",
     impact: "Clinical RAG & Gemma 4 function calling on Aadhaar-derived encrypted health vaults.",
-    thumbnail: "./assets/projects/inhv-preview.webp", // [PLACEHOLDER: Mockup WebP slot]
+    thumbnail: null, // Drop screenshot here when ready
     thumbnailFallback: "inhv",
     tech: ["Google Gemma 4", "Function Calling", "Clinical RAG", "Healthcare AI", "TypeScript", "SQL", "AES Security"],
     tags: ["Google Gemma 4", "Function Calling", "Clinical RAG", "Healthcare AI", "TypeScript", "SQL", "AES Security"],
@@ -100,7 +100,7 @@ export const projectsData = [
     tagline: "Sub-2-second QR scanner and live attendee telemetry engine built for Microsoft Innovations Club.",
     description: "A high-concurrency event check-in and attendee management operating system engineered for campus tech summits. Features sub-2-second in-browser webcam barcode scanning, 3-second live metrics sync, and cryptographically signed 2D QR passes to prevent duplicate entries. Adopted by MIC at VIT Chennai for digital entry management workflows.",
     impact: "Adopted by Microsoft Innovations Club (MIC) @ VIT Chennai for campus summits.",
-    thumbnail: "./assets/projects/orbitcheck-preview.webp", // [PLACEHOLDER: Mockup WebP slot]
+    thumbnail: null, // Drop screenshot here when ready
     thumbnailFallback: "orbitcheck",
     tech: ["TypeScript", "React/Next.js", "Webcam QR Scanner", "SQL", "Real-Time Sync"],
     tags: ["TypeScript", "React/Next.js", "Webcam QR Scanner", "SQL", "Real-Time Sync"],
@@ -129,7 +129,7 @@ export const projectsData = [
     tagline: "Zero-bloat personal portfolio and proof of journey: pure Vanilla JS, CSS tokens, and physics canvas.",
     description: "Built with pure Vanilla JavaScript, clean CSS design tokens, and a custom canvas physics background with zero framework bloat. Engineered as a proof of journey aggregating projects, verified LeetCode stats, skills, certifications, and academic trajectory with high tactile fidelity and 60fps performance.",
     impact: "Zero framework bloat, 100% responsive, sub-second initial load.",
-    thumbnail: "./assets/projects/portfolio-preview.webp", // [PLACEHOLDER: Mockup WebP slot]
+    thumbnail: null, // Drop screenshot here when ready
     thumbnailFallback: "portfolio",
     tech: ["Vanilla JS", "HTML Canvas", "CSS Tokens", "Interactive Physics", "Responsive Design"],
     tags: ["Vanilla JS", "HTML Canvas", "CSS Tokens", "Interactive Physics", "Responsive Design"],
@@ -158,7 +158,7 @@ export const projectsData = [
     tagline: "A collaborative swarm of autonomous AI agents delivering fully cited financial intelligence in under 60 seconds.",
     description: "Built specialized agents for real-time news extraction, quantitative parsing, and risk modeling. Delivered comprehensive, 100% source-cited financial dossiers with complete transparency.",
     impact: "Delivered comprehensive, 100% source-cited financial dossiers in under 60 seconds.",
-    thumbnail: "./assets/projects/multiagent-preview.webp", // [PLACEHOLDER: Mockup WebP slot]
+    thumbnail: null, // Drop screenshot here when ready
     thumbnailFallback: "multiagent",
     tech: ["Python", "Multi-Agent AI", "LLM Orchestration", "Market APIs", "Data Pipelines"],
     tags: ["Python", "Multi-Agent AI", "LLM Orchestration", "Market APIs", "Data Pipelines"],
