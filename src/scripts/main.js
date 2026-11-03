@@ -1,4 +1,6 @@
 import { profileData } from '../data/profile.js';
+import { projectsData } from '../data/projects.js';
+import { renderProjectCard, renderEndOfRowCard } from './project-card.js';
 import { SpatialCanvasEngine } from './spatial-canvas.js';
 import { TiltParallaxEngine } from './tilt-parallax.js';
 
@@ -124,16 +126,19 @@ class SpatialPortfolioApp {
   }
 
   renderProjects() {
-    const grid = document.getElementById('projects-grid');
+    const carousel = document.getElementById('projects-carousel');
     const filterContainer = document.getElementById('work-filter-bar');
-    if (!grid) return;
+    if (!carousel) return;
 
     // Extract unique categories
-    const categories = ['all', ...new Set(profileData.projects.map(p => p.category))];
+    const categories = ['all', ...new Set(projectsData.map(p => p.category))];
 
     if (filterContainer) {
       filterContainer.innerHTML = categories.map(cat => `
-        <button class="filter-btn ${cat === this.activeFilter ? 'active' : ''}" data-filter="${cat}">
+        <button class="filter-btn ${cat === this.activeFilter ? 'active' : ''}" 
+                data-filter="${cat}"
+                role="tab"
+                aria-selected="${cat === this.activeFilter}">
           ${cat === 'all' ? 'All Works' : cat}
         </button>
       `).join('');
@@ -141,76 +146,205 @@ class SpatialPortfolioApp {
       filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           this.activeFilter = e.currentTarget.getAttribute('data-filter');
-          filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          filterContainer.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
           e.currentTarget.classList.add('active');
-          this.renderProjectsList();
+          e.currentTarget.setAttribute('aria-selected', 'true');
+          this.renderCarouselCards();
+          // Reset carousel scroll to start on filter change
+          carousel.scrollTo({ left: 0, behavior: this.isReducedMotion() ? 'auto' : 'smooth' });
         });
       });
     }
 
-    this.renderProjectsList();
+    this.setupCarouselControls();
+    this.renderCarouselCards();
   }
 
-  renderProjectsList() {
-    const grid = document.getElementById('projects-grid');
-    if (!grid) return;
+  renderCarouselCards() {
+    const carousel = document.getElementById('projects-carousel');
+    if (!carousel) return;
 
-    const filtered = this.activeFilter === 'all' 
-      ? profileData.projects 
-      : profileData.projects.filter(p => p.category === this.activeFilter);
+    // Filter projects: when 'all', show featured projects
+    let displayProjects = projectsData.filter(p => {
+      if (this.activeFilter === 'all') {
+        return p.featured === true;
+      }
+      return p.category === this.activeFilter;
+    });
 
-    grid.innerHTML = filtered.map(p => `
-      <article class="project-card-3d" data-tilt data-tilt-max="4" data-project-id="${p.id}">
-        <div class="project-card-glare"></div>
-        <div class="project-preview-frame">
-          <div class="project-dynamic-canvas">
-            ${this.getProjectGraphic(p)}
-          </div>
-          <span class="project-badge-corner" style="color: ${p.accentColor}">${p.category}</span>
-          <span class="project-year-corner">${p.year}</span>
-        </div>
-        <div class="project-content-body">
-          <div class="project-title-row">
-            <h3 class="project-card-title">${p.title}</h3>
-            <svg class="project-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
-          </div>
-          <p class="project-tagline">${p.tagline}</p>
-          <div class="project-tags-list">
-            ${p.tags.map(t => `<span class="project-tag-item">${t}</span>`).join('')}
-          </div>
-          <div class="project-card-actions">
-            ${p.liveUrl && p.liveUrl !== '#' ? `
-              <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="card-action-btn live-action" onclick="event.stopPropagation();">
-                <span>Live App</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-            ` : ''}
-            ${p.githubUrl ? `
-              <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="card-action-btn code-action" onclick="event.stopPropagation();">
-                <span>GitHub</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-              </a>
-            ` : ''}
-            <span class="card-action-hint">Case Study ➔</span>
-          </div>
-        </div>
-      </article>
-    `).join('');
+    if (displayProjects.length === 0 && this.activeFilter !== 'all') {
+      displayProjects = projectsData.filter(p => p.category === this.activeFilter);
+    }
 
-    // Reattach card event listeners
-    grid.querySelectorAll('.project-card-3d').forEach(card => {
-      card.addEventListener('click', () => {
+    const cardsHtml = displayProjects.map(p => 
+      renderProjectCard(p, { isCarousel: true, viewMode: 'grid' })
+    ).join('');
+
+    const endOfRowCard = renderEndOfRowCard(projectsData.length);
+
+    carousel.innerHTML = cardsHtml + endOfRowCard;
+
+    // Attach click listeners for case study modal
+    carousel.querySelectorAll('[data-project-id]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a') && !e.target.closest('[data-action="case-study"]')) {
+          return;
+        }
+        if (this.isCarouselDragging) {
+          return;
+        }
         const id = card.getAttribute('data-project-id');
         this.openCaseStudy(id);
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (!e.target.closest('a')) {
+            e.preventDefault();
+            const id = card.getAttribute('data-project-id');
+            this.openCaseStudy(id);
+          }
+        }
       });
     });
 
     if (this.tiltEngine) {
       this.tiltEngine.refresh();
     }
+
+    this.updateCarouselState();
+  }
+
+  setupCarouselControls() {
+    const carousel = document.getElementById('projects-carousel');
+    const prevBtn = document.getElementById('carousel-prev-btn');
+    const nextBtn = document.getElementById('carousel-next-btn');
+    if (!carousel || this.carouselInitialized) return;
+    this.carouselInitialized = true;
+
+    const scrollOneCard = (direction) => {
+      const card = carousel.querySelector('.carousel-card');
+      const cardWidth = card ? card.offsetWidth : 380;
+      const gap = 24;
+      const scrollAmount = (cardWidth + gap) * direction;
+      const behavior = this.isReducedMotion() ? 'auto' : 'smooth';
+      carousel.scrollBy({ left: scrollAmount, behavior });
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', () => scrollOneCard(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => scrollOneCard(1));
+
+    // Scroll listener for progress bar, disabled arrow state, and edge fade masks
+    carousel.addEventListener('scroll', () => {
+      this.updateCarouselState();
+    }, { passive: true });
+
+    // Keyboard navigation (ArrowLeft / ArrowRight)
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        scrollOneCard(1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        scrollOneCard(-1);
+      }
+    });
+
+    // Mouse wheel: horizontal ONLY when cursor is over carousel AND user holds Shift
+    carousel.addEventListener('wheel', (e) => {
+      if (e.shiftKey) {
+        e.preventDefault();
+        carousel.scrollLeft += (e.deltaY || e.deltaX);
+      }
+      // If NOT shiftKey, DO NOT preventDefault! Allow normal page vertical scroll!
+    }, { passive: false });
+
+    // Click and drag with grab/grabbing cursor and small threshold (> 6px)
+    let isDown = false;
+    let startX = 0;
+    let initialScrollLeft = 0;
+    this.isCarouselDragging = false;
+
+    carousel.addEventListener('mousedown', (e) => {
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      isDown = true;
+      this.isCarouselDragging = false;
+      carousel.classList.add('is-dragging');
+      startX = e.pageX - carousel.offsetLeft;
+      initialScrollLeft = carousel.scrollLeft;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX);
+      if (Math.abs(walk) > 6) {
+        this.isCarouselDragging = true;
+      }
+      carousel.scrollLeft = initialScrollLeft - walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        carousel.classList.remove('is-dragging');
+        setTimeout(() => {
+          this.isCarouselDragging = false;
+        }, 60);
+      }
+    });
+
+    window.addEventListener('resize', () => this.updateCarouselState(), { passive: true });
+  }
+
+  updateCarouselState() {
+    const carousel = document.getElementById('projects-carousel');
+    const prevBtn = document.getElementById('carousel-prev-btn');
+    const nextBtn = document.getElementById('carousel-next-btn');
+    const progressBar = document.getElementById('carousel-progress-thumb');
+    const leftFade = document.getElementById('carousel-edge-left');
+    const rightFade = document.getElementById('carousel-edge-right');
+
+    if (!carousel) return;
+
+    const scrollLeft = carousel.scrollLeft;
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+    // Disabled state on prev/next arrows
+    if (prevBtn) {
+      const atStart = scrollLeft <= 4;
+      prevBtn.disabled = atStart;
+      prevBtn.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+    }
+    if (nextBtn) {
+      const atEnd = scrollLeft >= maxScroll - 4 || maxScroll <= 0;
+      nextBtn.disabled = atEnd;
+      nextBtn.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
+    }
+
+    // Edge fade masks
+    if (leftFade) {
+      leftFade.style.opacity = scrollLeft > 10 ? '1' : '0';
+    }
+    if (rightFade) {
+      rightFade.style.opacity = (maxScroll > 10 && scrollLeft < maxScroll - 10) ? '1' : '0';
+    }
+
+    // Progress bar thumb
+    if (progressBar) {
+      const ratio = maxScroll > 0 ? Math.min(Math.max(scrollLeft / maxScroll, 0), 1) : 1;
+      const trackWidth = progressBar.parentElement ? progressBar.parentElement.clientWidth : 140;
+      const thumbWidth = Math.max(trackWidth * (carousel.clientWidth / carousel.scrollWidth), 28);
+      progressBar.style.width = `${thumbWidth}px`;
+      progressBar.style.transform = `translateX(${ratio * (trackWidth - thumbWidth)}px)`;
+    }
+  }
+
+  isReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
   getProjectGraphic(p) {
@@ -1513,6 +1647,14 @@ class SpatialPortfolioApp {
 
     if (!entrance || !line1El || !line2El) return;
 
+    // Show entrance only once per session to reduce friction
+    const hasSeenWelcome = sessionStorage.getItem('portfolio_welcome_seen');
+    if (hasSeenWelcome) {
+      entrance.classList.add('welcome-hidden');
+      document.body.style.overflow = '';
+      return;
+    }
+
     let autoEnterTimer = null;
     let isExiting = false;
 
@@ -1520,6 +1662,7 @@ class SpatialPortfolioApp {
       if (isExiting) return;
       isExiting = true;
       clearTimeout(autoEnterTimer);
+      sessionStorage.setItem('portfolio_welcome_seen', 'true');
 
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;

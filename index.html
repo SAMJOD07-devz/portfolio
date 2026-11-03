@@ -241,37 +241,85 @@
 
     </section>
 
-    <!-- SELECTED WORK SECTION -->
-    <section id="work" class="section-wrapper">
-      <div class="section-header">
-        <span class="section-tagline">Engineering &amp; Projects</span>
-        <h2 class="section-heading">Featured <span class="editorial">Systems</span> &amp; Architecture</h2>
-        <p class="section-subtext">Production web platforms, autonomous AI pipelines, and systems software engineered for scale, reliability, and real-world users.</p>
+    <!-- SELECTED WORK SECTION (COMPACT HORIZONTAL SHOWCASE) -->
+    <section id="work" class="section-wrapper work-carousel-section">
+      <div class="section-header work-section-header">
+        <div class="work-header-text">
+          <span class="section-tagline">Engineering &amp; Systems</span>
+          <h2 class="section-heading">Featured <span class="editorial">Systems</span> &amp; Architecture</h2>
+          <p class="section-subtext">Production web platforms, autonomous AI pipelines, and systems software engineered for scale, reliability, and real-world users.</p>
+        </div>
+
+        <!-- Header Controls: View All Link + Prev/Next Buttons -->
+        <div class="work-header-controls">
+          <a href="projects.html" class="work-view-all-link" aria-label="View all projects in repository">
+            <span>View All Projects</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+
+          <div class="carousel-nav-arrows" role="group" aria-label="Carousel navigation">
+            <button id="carousel-prev-btn" class="carousel-arrow-btn" aria-label="Previous project" title="Previous project" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button id="carousel-next-btn" class="carousel-arrow-btn" aria-label="Next project" title="Next project">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Work Category Filter -->
-      <div class="work-filter-bar" id="work-filter-bar">
+      <!-- Work Category Filter (Horizontally scrollable on mobile) -->
+      <div class="work-filter-bar horizontal-scroll-chips" id="work-filter-bar" role="tablist" aria-label="Filter featured projects by category">
         <!-- Hydrated dynamically -->
       </div>
 
-      <!-- 3D Project Cards Grid -->
-      <div class="projects-spatial-grid" id="projects-grid">
-        <!-- Initial skeleton shimmer to prevent empty dead space -->
-        <div class="project-skeleton-card" aria-hidden="true">
-          <div class="skeleton-frame skeleton-shimmer"></div>
-          <div class="skeleton-body">
-            <div class="skeleton-line skeleton-title skeleton-shimmer"></div>
-            <div class="skeleton-line skeleton-text skeleton-shimmer"></div>
-            <div class="skeleton-line skeleton-tags skeleton-shimmer"></div>
+      <!-- Horizontal Carousel Showcase Stage -->
+      <div class="carousel-showcase-stage" id="carousel-stage">
+        <!-- Edge Fade Masks -->
+        <div class="carousel-edge-fade edge-left" id="carousel-edge-left" aria-hidden="true"></div>
+        <div class="carousel-edge-fade edge-right" id="carousel-edge-right" aria-hidden="true"></div>
+
+        <!-- Horizontal Scroll Track -->
+        <div class="projects-horizontal-carousel" 
+             id="projects-carousel" 
+             role="region" 
+             aria-label="Featured projects" 
+             tabindex="0">
+          <!-- Initial skeleton shimmer cards matching final card dimensions -->
+          <div class="project-skeleton-card carousel-card" aria-hidden="true">
+            <div class="skeleton-frame skeleton-shimmer"></div>
+            <div class="skeleton-body">
+              <div class="skeleton-line skeleton-title skeleton-shimmer"></div>
+              <div class="skeleton-line skeleton-text skeleton-shimmer"></div>
+              <div class="skeleton-line skeleton-tags skeleton-shimmer"></div>
+            </div>
+          </div>
+          <div class="project-skeleton-card carousel-card" aria-hidden="true">
+            <div class="skeleton-frame skeleton-shimmer"></div>
+            <div class="skeleton-body">
+              <div class="skeleton-line skeleton-title skeleton-shimmer"></div>
+              <div class="skeleton-line skeleton-text skeleton-shimmer"></div>
+              <div class="skeleton-line skeleton-tags skeleton-shimmer"></div>
+            </div>
           </div>
         </div>
-        <div class="project-skeleton-card" aria-hidden="true">
-          <div class="skeleton-frame skeleton-shimmer"></div>
-          <div class="skeleton-body">
-            <div class="skeleton-line skeleton-title skeleton-shimmer"></div>
-            <div class="skeleton-line skeleton-text skeleton-shimmer"></div>
-            <div class="skeleton-line skeleton-tags skeleton-shimmer"></div>
-          </div>
+      </div>
+
+      <!-- Carousel Progress Indicator & Interaction Hint -->
+      <div class="carousel-footer-bar">
+        <div class="carousel-progress-track" aria-hidden="true">
+          <div class="carousel-progress-thumb" id="carousel-progress-thumb"></div>
+        </div>
+        <div class="carousel-interaction-hint">
+          <span class="hint-desktop">Shift + Scroll or Drag to browse • Click card for case study</span>
+          <span class="hint-mobile">Swipe to browse • Tap card for case study</span>
         </div>
       </div>
     </section>
