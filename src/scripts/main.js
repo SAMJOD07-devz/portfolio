@@ -60,7 +60,9 @@ class SpatialPortfolioApp {
     if (brandName) brandName.textContent = personal.name;
 
     const heroStatus = document.getElementById('hero-status-text');
-    if (heroStatus) heroStatus.textContent = `${personal.statusBadge} • ${personal.availability}`;
+    if (heroStatus) {
+      heroStatus.textContent = "CSE @ VIT Chennai '29 • Open for SDE internships & research";
+    }
 
     // Hero title: use two-line serif + display-weight editorial treatment
     const heroName = document.getElementById('hero-personal-name');
@@ -158,7 +160,7 @@ class SpatialPortfolioApp {
       : profileData.projects.filter(p => p.category === this.activeFilter);
 
     grid.innerHTML = filtered.map(p => `
-      <article class="project-card-3d" data-tilt data-tilt-max="9" data-project-id="${p.id}">
+      <article class="project-card-3d" data-tilt data-tilt-max="4" data-project-id="${p.id}">
         <div class="project-card-glare"></div>
         <div class="project-preview-frame">
           <div class="project-dynamic-canvas">
@@ -469,7 +471,7 @@ class SpatialPortfolioApp {
     if (!grid) return;
 
     grid.innerHTML = profileData.capabilities.map(cap => `
-      <div class="capability-card" data-tilt data-tilt-max="6">
+      <div class="capability-card" data-tilt data-tilt-max="4">
         <div class="capability-card-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
@@ -536,7 +538,7 @@ class SpatialPortfolioApp {
     const credGrid = document.getElementById('credentials-grid');
     if (credGrid && profileData.certifications) {
       credGrid.innerHTML = profileData.certifications.map(c => `
-        <article class="credential-card" data-tilt data-tilt-max="6">
+        <article class="credential-card" data-tilt data-tilt-max="4">
           <div class="credential-reticle reticle-tl"></div>
           <div class="credential-reticle reticle-br"></div>
           <div class="credential-top">
@@ -579,7 +581,7 @@ class SpatialPortfolioApp {
 
     grid.innerHTML = `
       <!-- 1. GitHub Ecosystem Card -->
-      <article class="presence-card" data-tilt data-tilt-max="7">
+      <article class="presence-card" data-tilt data-tilt-max="4">
         <div class="presence-header">
           <div class="presence-identity">
             <div class="presence-platform-icon">
@@ -647,7 +649,7 @@ class SpatialPortfolioApp {
       </article>
 
       <!-- 2. LeetCode Problem Solving Card (200+ Solved, 85-Day Streak, 1440 Rating) -->
-      <article class="presence-card" data-tilt data-tilt-max="7">
+      <article class="presence-card" data-tilt data-tilt-max="4">
         <div class="presence-header">
           <div class="presence-identity">
             <div class="presence-platform-icon" style="color: #ffa116;">
@@ -773,10 +775,10 @@ class SpatialPortfolioApp {
       </article>
 
       <!-- 3. Codolio Unified Platform Card -->
-      <article class="presence-card" data-tilt data-tilt-max="7">
+      <article class="presence-card" data-tilt data-tilt-max="4">
         <div class="presence-header">
           <div class="presence-identity">
-            <div class="presence-platform-icon" style="color: #7c3aed;">
+            <div class="presence-platform-icon" style="color: var(--accent);">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                 <polyline points="2 17 12 22 22 17"></polyline>
@@ -788,8 +790,8 @@ class SpatialPortfolioApp {
               <span class="presence-handle">${codolio.handle}</span>
             </div>
           </div>
-          <span class="presence-status-badge" style="color: #7c3aed; border-color: rgba(124, 58, 237, 0.25);">
-            <span class="skill-bullet" style="background-color: #7c3aed;"></span>
+          <span class="presence-status-badge" style="color: var(--accent); border-color: var(--accent-border);">
+            <span class="skill-bullet" style="background-color: var(--accent);"></span>
             <span>${codolio.status}</span>
           </span>
         </div>
@@ -816,7 +818,7 @@ class SpatialPortfolioApp {
           </div>
           <div class="codolio-item-pill">
             <span>DSA &amp; Algorithmic Milestones</span>
-            <span style="font-family: var(--font-tech); font-weight: 600; color: #7c3aed;">Active Streaks</span>
+            <span style="font-family: var(--font-tech); font-weight: 600; color: var(--accent);">Active Streaks</span>
           </div>
         </div>
 
@@ -839,7 +841,7 @@ class SpatialPortfolioApp {
       </article>
 
       <!-- 4. LinkedIn Network Card -->
-      <article class="presence-card" data-tilt data-tilt-max="7">
+      <article class="presence-card" data-tilt data-tilt-max="4">
         <div class="presence-header">
           <div class="presence-identity">
             <div class="presence-platform-icon" style="color: #0a66c2;">
@@ -976,25 +978,53 @@ class SpatialPortfolioApp {
   }
 
   setupNavigationObserver() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link-item a');
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('.nav-link-item a'));
+    if (!sections.length || !navLinks.length) return;
 
+    const setActiveLink = (id) => {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        const isActive = href === `#${id}`;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    // Responsive reading band: accurately highlights active section in view
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
+          setActiveLink(entry.target.getAttribute('id'));
         }
       });
-    }, { threshold: 0.35 });
+    }, {
+      rootMargin: '-18% 0px -62% 0px',
+      threshold: 0
+    });
 
     sections.forEach(s => observer.observe(s));
+
+    // Handle instant boundary snaps (top of hero & bottom of contact)
+    let scrollDebounce = null;
+    window.addEventListener('scroll', () => {
+      if (scrollDebounce) return;
+      scrollDebounce = setTimeout(() => {
+        scrollDebounce = null;
+        if (window.scrollY < 80) {
+          setActiveLink('hero');
+          return;
+        }
+        if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 70) {
+          const lastSec = sections[sections.length - 1];
+          if (lastSec) setActiveLink(lastSec.getAttribute('id'));
+        }
+      }, 40);
+    }, { passive: true });
   }
 
   setupScrollReveal() {

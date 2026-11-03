@@ -116,6 +116,14 @@ body {
   line-height: 1.65;
 }
 
+/* Scroll Margins for all Sections so headings never hide under floating nav */
+section[id],
+.section-wrapper,
+.hero-section,
+.contact-section-wrapper {
+  scroll-margin-top: calc(var(--nav-h) + 1.5rem);
+}
+
 /* ============================================================
    AMBIENT LAYERS (Fixed)
    ============================================================ */
@@ -154,12 +162,12 @@ body {
   z-index: 1000;
   display: flex; align-items: center; gap: 0.85rem;
   padding: 0.45rem 0.75rem;
-  background: rgba(255,255,255,0.9);
+  background: rgba(250, 248, 243, 0.95);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(0,0,0,0.07);
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: var(--r-full);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  box-shadow: 0 10px 32px -4px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
   white-space: nowrap; width: max-content;
   max-width: calc(100vw - 2rem);
   animation: navDescend 0.9s 0.2s var(--ease-out) forwards;
@@ -373,7 +381,10 @@ body {
   font-size: clamp(1rem, 1.5vw, 1.18rem);
   font-weight: 400;
   color: var(--text-muted); line-height: 1.65;
-  max-width: 520px; margin-bottom: 2.75rem;
+  max-width: 580px; margin-bottom: 2.75rem;
+  text-wrap: balance;
+  word-break: normal;
+  hyphens: manual;
   animation: fadeUp 0.8s 0.85s var(--ease-out) both;
 }
 
@@ -700,6 +711,7 @@ body {
 
 .projects-spatial-grid {
   display: grid; grid-template-columns: repeat(2,1fr); gap: 2.25rem;
+  perspective: 1200px;
 }
 @media (max-width: 880px) {
   .projects-spatial-grid { grid-template-columns: 1fr; gap: 1.75rem; }
@@ -711,7 +723,7 @@ body {
   overflow: hidden; box-shadow: var(--shadow-md);
   backdrop-filter: blur(20px); transform-style: preserve-3d;
   transition: transform 0.26s var(--ease-out), border-color 0.3s, box-shadow 0.3s;
-  cursor: pointer; display: flex; flex-direction: column;
+  cursor: pointer; display: flex; flex-direction: column; height: 100%;
 }
 .project-card-3d:hover {
   border-color: rgba(0,0,0,0.14); background: var(--bg-card-hover);
@@ -902,7 +914,8 @@ body {
   transform: translate(4px,-4px); color: var(--accent);
 }
 .project-tagline {
-  font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 1.5rem;
+  font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 1.25rem;
+  min-height: 2.8rem;
 }
 .project-tags-list {
   display: flex; flex-wrap: wrap; gap: 0.4rem;
@@ -1621,13 +1634,13 @@ body {
 @media (max-width: 600px) { .presence-stats-row { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 .presence-stat-box { display: flex; flex-direction: column; gap: 0.18rem; min-width: 0; }
 .presence-stat-num {
-  font-family: var(--font-display); font-size: clamp(1rem, 1.4vw, 1.22rem);
-  font-weight: 700; color: var(--text-primary); line-height: 1.1;
-  letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: var(--font-display); font-size: clamp(0.92rem, 1.2vw, 1.15rem);
+  font-weight: 700; color: var(--text-primary); line-height: 1.2;
+  letter-spacing: -0.02em; white-space: normal; word-break: break-word;
 }
 .presence-stat-lbl {
   font-family: var(--font-tech); font-size: 0.68rem; color: var(--text-muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  white-space: normal; word-break: break-word; line-height: 1.25;
   letter-spacing: 0.02em; text-transform: uppercase;
 }
 
@@ -1964,7 +1977,8 @@ body {
   text-transform: uppercase; letter-spacing: 0.08em;
 }
 .leetcode-badges-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.55rem;
+  overflow: hidden;
 }
 @media (max-width: 640px) {
   .leetcode-badges-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2427,9 +2441,9 @@ body {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  margin-top: 1.15rem;
-  padding-top: 0.95rem;
-  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.85rem;
+  padding-top: 0;
+  border-top: none;
   position: relative;
   z-index: 5;
 }
@@ -3613,4 +3627,68 @@ body {
   background: var(--accent);
   color: #ffffff;
   border-color: var(--accent);
+}
+
+
+/* ============================================================
+   PROJECT SKELETON SHIMMER (Zero Dead Space)
+   ============================================================ */
+.project-skeleton-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.skeleton-frame {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: rgba(0, 0, 0, 0.04);
+}
+[data-theme="dark"] .skeleton-frame {
+  background: rgba(255, 255, 255, 0.04);
+}
+.skeleton-body {
+  padding: 1.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.skeleton-line {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+}
+[data-theme="dark"] .skeleton-line {
+  background: rgba(255, 255, 255, 0.05);
+}
+.skeleton-title { width: 75%; height: 22px; }
+.skeleton-text { width: 95%; height: 40px; }
+.skeleton-tags { width: 60%; height: 18px; margin-top: auto; }
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.02) 100%);
+  background-size: 200% 100%;
+  animation: skeletonWave 1.6s ease-in-out infinite;
+}
+[data-theme="dark"] .skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0.02) 100%);
+  background-size: 200% 100%;
+}
+@keyframes skeletonWave {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+
+/* Repo List Link Icons */
+.repo-meta-right svg {
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+.repo-pill:hover .repo-meta-right svg {
+  color: var(--accent);
+  transform: translate(2px, -2px);
 }

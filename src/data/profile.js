@@ -16,8 +16,8 @@ export const profileData = {
     avatarUrl: "./assets/user-portrait-2.png",
     secondaryAvatarUrl: "./assets/user-portrait-2.png",
     location: "Chennai, Tamil Nadu, India",
-    availability: "Open for SDE Internships, Research & Collabs (On-site & Hybrid, Chennai)",
-    statusBadge: "CSE @ VIT Chennai '29 • Open for SDE Internships & Collabs",
+    availability: "Open for SDE internships & research",
+    statusBadge: "CSE @ VIT Chennai '29",
     shortBio: "2nd year CSE grad at Vellore Institute of Technology Chennai. Development Member in MIC @VIT CHENNAI. GSSoC'26 Open Source Contributor. Full stack web dev. AIML. CP with 200+ leetcode solved.",
     email: "saumyapandyaartist@gmail.com",
     phone: "+91-7984641399",
@@ -378,7 +378,7 @@ export const profileData = {
         { value: "9+", label: "Repositories" },
         { value: "GSSoC '26", label: "Open Source" },
         { value: "MIC VITC", label: "Dev Member" },
-        { value: "Python/TS/Solidity", label: "Core Stack" }
+        { value: "Python • Web3", label: "Core Stack" }
       ],
       featuredRepos: [
         { name: "SoundChain-Blockchain", desc: "Ethereum royalty settlement protocol with 10,000 BPS splits, ERC-20 $LSTN, and 3D vinyl visualizer", language: "Solidity / React", url: "https://github.com/SAMJOD07-devz/SoundChain-Blockchain" },
@@ -416,7 +416,7 @@ export const profileData = {
       contestsAttended: 4,
       headline: "Active daily problem solver on LeetCode with 200+ solved problems (91 Easy, 80 Medium, 29 Hard), 85-day max streak, 1,440 contest rating, and 5 milestone badges.",
       stats: [
-        { value: "200", label: "Problems Solved" },
+        { value: "200+", label: "Problems Solved" },
         { value: "85 Days", label: "Max Daily Streak" },
         { value: "1,440", label: "Contest Rating" },
         { value: "129", label: "Total Active Days" }

@@ -97,14 +97,14 @@
       </button>
 
       <!-- Replay Intro Portal Button -->
-      <button id="replay-intro-btn" class="nav-ctrl-btn" title="Replay Welcome Intro" aria-label="Replay Welcome Intro">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button id="replay-intro-btn" class="nav-ctrl-btn" title="Replay intro animation" aria-label="Replay intro animation">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"></polygon>
         </svg>
       </button>
 
       <!-- Dark / Light Theme Toggle -->
-      <button id="theme-toggle-btn" class="nav-ctrl-btn" title="Toggle Dark / Light Theme" aria-label="Toggle Theme Mode">
+      <button id="theme-toggle-btn" class="nav-ctrl-btn" title="Switch theme (dark/light)" aria-label="Switch theme mode">
         <svg id="theme-icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -121,12 +121,15 @@
         </svg>
       </button>
 
-      <!-- Accent Color Dropdown Picker -->
+      <!-- Accent Color Dropdown Picker (Palette Icon) -->
       <div class="accent-dropdown">
-        <button class="nav-ctrl-btn" title="Change Theme Accent" aria-label="Change Theme Accent">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        <button class="nav-ctrl-btn" title="Customize theme accent color" aria-label="Customize theme accent color">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z"></path>
           </svg>
         </button>
         <div id="accent-palette-picker" class="accent-palette-picker"></div>
@@ -145,7 +148,7 @@
         <div class="hero-text-stage">
           <div class="hero-meta-pill" id="hero-status-badge">
             <span class="status-dot-radar"></span>
-            <span id="hero-status-text">CSE @ VIT Chennai '29 • Open for SDE Internships, Research &amp; Collabs</span>
+            <span id="hero-status-text">CSE @ VIT Chennai '29 • Open for SDE internships &amp; research</span>
           </div>
 
           <h1 class="hero-title" id="hero-personal-name">
@@ -154,7 +157,7 @@
           </h1>
 
           <p class="hero-tagline" id="hero-tagline">
-            Engineering full-stack systems, applied AI, and open-source software.
+            Engineering full-stack systems, applied AI, and open&#8209;source software.
           </p>
 
           <!-- Personal Banner Tagline Matching LinkedIn Source -->
@@ -253,7 +256,23 @@
 
       <!-- 3D Project Cards Grid -->
       <div class="projects-spatial-grid" id="projects-grid">
-        <!-- Hydrated dynamically -->
+        <!-- Initial skeleton shimmer to prevent empty dead space -->
+        <div class="project-skeleton-card" aria-hidden="true">
+          <div class="skeleton-frame skeleton-shimmer"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line skeleton-title skeleton-shimmer"></div>
+            <div class="skeleton-line skeleton-text skeleton-shimmer"></div>
+            <div class="skeleton-line skeleton-tags skeleton-shimmer"></div>
+          </div>
+        </div>
+        <div class="project-skeleton-card" aria-hidden="true">
+          <div class="skeleton-frame skeleton-shimmer"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line skeleton-title skeleton-shimmer"></div>
+            <div class="skeleton-line skeleton-text skeleton-shimmer"></div>
+            <div class="skeleton-line skeleton-tags skeleton-shimmer"></div>
+          </div>
+        </div>
       </div>
     </section>
 

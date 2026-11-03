@@ -1,4 +1,3 @@
-
 /**
  * TILT & SPATIAL PARALLAX ENGINE
  * --------------------------------------------------------------------------
@@ -27,7 +26,19 @@ export class TiltParallaxEngine {
   }
 
   setupTiltCards() {
+    // Disable tilt on touch devices or if reduced motion is preferred
+    const isTouch = window.matchMedia('(hover: none)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
     const cards = document.querySelectorAll('[data-tilt]');
+
+    if (isTouch || prefersReducedMotion) {
+      cards.forEach(card => {
+        card.style.transform = 'none';
+      });
+      return;
+    }
+
     cards.forEach((card) => {
       let isHovered = false;
       let reqId = null;
@@ -36,18 +47,19 @@ export class TiltParallaxEngine {
       let curRotX = 0;
       let curRotY = 0;
 
-      const maxTilt = parseFloat(card.getAttribute('data-tilt-max')) || 12;
+      // Cap max tilt to ~4 degrees to prevent clipping and nav collisions
+      const rawMax = parseFloat(card.getAttribute('data-tilt-max')) || 4;
+      const maxTilt = Math.min(rawMax, 4);
 
       const updateCard = () => {
         curRotX += (targetRotX - curRotX) * 0.12;
         curRotY += (targetRotY - curRotY) * 0.12;
 
-        card.style.transform = `perspective(1000px) rotateX(${curRotX}deg) rotateY(${curRotY}deg) scale3d(1.02, 1.02, 1.02)`;
-
         if (isHovered || Math.abs(targetRotX - curRotX) > 0.05 || Math.abs(targetRotY - curRotY) > 0.05) {
+          card.style.transform = `rotateX(${curRotX.toFixed(2)}deg) rotateY(${curRotY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
           reqId = requestAnimationFrame(updateCard);
         } else {
-          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+          card.style.transform = 'none';
         }
       };
 
@@ -82,9 +94,13 @@ export class TiltParallaxEngine {
   }
 
   setupMagneticButtons() {
+    const isTouch = window.matchMedia('(hover: none)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isTouch || prefersReducedMotion) return;
+
     const magnetics = document.querySelectorAll('[data-magnetic]');
     magnetics.forEach((btn) => {
-      const strength = parseFloat(btn.getAttribute('data-magnetic-strength')) || 0.35;
+      const strength = Math.min(parseFloat(btn.getAttribute('data-magnetic-strength')) || 0.2, 0.25);
 
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
@@ -94,29 +110,36 @@ export class TiltParallaxEngine {
         const deltaX = (e.clientX - centerX) * strength;
         const deltaY = (e.clientY - centerY) * strength;
 
-        btn.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+        btn.style.transform = `translate3d(${deltaX.toFixed(1)}px, ${deltaY.toFixed(1)}px, 0)`;
       });
 
       btn.addEventListener('mouseleave', () => {
-        btn.style.transform = `translate3d(0px, 0px, 0)`;
+        btn.style.transform = 'translate3d(0, 0, 0)';
       });
     });
   }
 
   setupScrollParallax() {
-    const parallaxItems = document.querySelectorAll('[data-parallax-speed]');
-    if (parallaxItems.length === 0) return;
+    const isTouch = window.matchMedia('(hover: none)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (isTouch || prefersReducedMotion) return;
 
+    const parallaxItems = document.querySelectorAll('[data-parallax-speed]');
+    if (!parallaxItems.length) return;
+
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      parallaxItems.forEach((item) => {
-        const speed = parseFloat(item.getAttribute('data-parallax-speed')) || 0.1;
-        const rect = item.parentElement ? item.parentElement.getBoundingClientRect() : null;
-        if (rect && rect.top < window.innerHeight && rect.bottom > 0) {
-          const offset = (window.innerHeight - rect.top) * speed * 0.2;
-          item.style.transform = `translate3d(0, ${-offset}px, 0)`;
-        }
-      });
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          parallaxItems.forEach(item => {
+            const speed = parseFloat(item.getAttribute('data-parallax-speed')) || 0.1;
+            item.style.transform = `translate3d(0, ${-(scrollY * speed).toFixed(1)}px, 0)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive: true });
   }
 }
