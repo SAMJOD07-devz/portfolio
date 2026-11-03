@@ -9,6 +9,13 @@
   <meta property="og:title" content="All Projects | Saumya Pandya — Portfolio Archive">
   <meta property="og:description" content="Explore the comprehensive project registry: full-stack web apps, 3NF databases, applied AI with Gemma 4, and Ethereum smart contracts.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://samjod07-devz.github.io/portfolio/projects.html">
+  <meta property="og:image" content="./assets/og-image.png">
+  <link rel="canonical" href="https://samjod07-devz.github.io/portfolio/projects.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="All Projects &amp; Architecture | Saumya Pandya">
+  <meta name="twitter:description" content="Explore full-stack platforms, 3NF databases, applied AI with Gemma 4, and Ethereum smart contracts engineered by Saumya Pandya.">
+  <meta name="twitter:image" content="./assets/og-image.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +24,9 @@
   <link rel="stylesheet" href="./src/styles/index.css">
 </head>
 <body class="projects-archive-body">
+
+  <!-- Global Thin Scroll Progress Indicator -->
+  <div id="global-scroll-progress" class="global-scroll-progress" aria-hidden="true"><div id="global-scroll-bar" class="global-scroll-bar"></div></div>
 
   <!-- Ambient Film Grain Overlay -->
   <div class="ambient-grain" aria-hidden="true"></div>
@@ -42,6 +52,13 @@
     </ul>
 
     <div class="nav-dock-actions">
+      <!-- Command Palette Quick Launcher (Ctrl+K / Cmd+K) -->
+      <button id="cmd-palette-btn" class="nav-ctrl-btn nav-cmd-btn" title="Open Command Palette (Ctrl+K or ⌘K)" aria-label="Open Command Palette">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+        </svg>
+        <span class="cmd-kbd-badge">⌘K</span>
+      </button>
       <!-- Quick Resume Action for HR & Recruiters -->
       <button id="nav-resume-btn" class="nav-resume-btn" title="View / Download Resume (CV)" aria-label="View Resume">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">

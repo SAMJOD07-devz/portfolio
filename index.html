@@ -9,6 +9,50 @@
   <meta property="og:title" content="Saumya Pandya — Portfolio | CSE @ VIT Chennai '29">
   <meta property="og:description" content="2nd Year CSE student at VIT Chennai crafting full-stack systems, applied AI, and open-source software.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://samjod07-devz.github.io/portfolio/">
+  <meta property="og:image" content="./assets/og-image.png">
+  <link rel="canonical" href="https://samjod07-devz.github.io/portfolio/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Saumya Pandya — Full-Stack Developer | Systems, AI &amp; Web3">
+  <meta name="twitter:description" content="2nd Year CSE @ VIT Chennai '29. Full-Stack Developer, Applied AI &amp; Blockchain Enthusiast, GSSoC '26 Contributor, MIC Development Member.">
+  <meta name="twitter:image" content="./assets/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Saumya Pandya",
+    "url": "https://samjod07-devz.github.io/portfolio/",
+    "email": "saumyapandyaartist@gmail.com",
+    "telephone": "+91-7984641399",
+    "jobTitle": "Full-Stack Developer & Software Engineer",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Vellore Institute of Technology, Chennai",
+      "department": "Computer Science and Engineering"
+    },
+    "memberOf": [
+      {
+        "@type": "Organization",
+        "name": "Microsoft Innovations Club (MIC) @ VIT Chennai",
+        "roleName": "Development Member"
+      },
+      {
+        "@type": "Organization",
+        "name": "GirlScript Summer of Code (GSSoC 2026)",
+        "roleName": "Open Source Contributor"
+      }
+    ],
+    "sameAs": [
+      "https://github.com/SAMJOD07-devz",
+      "https://www.linkedin.com/in/saumya-pandya-5a0376369/",
+      "https://leetcode.com/u/SAMJOD07/"
+    ],
+    "knowsAbout": [
+      "Python", "React", "PostgreSQL", "SQL", "Solidity", "Machine Learning", 
+      "Data Structures and Algorithms", "TypeScript", "Docker"
+    ]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +61,9 @@
   <link rel="stylesheet" href="./src/styles/index.css">
 </head>
 <body>
+
+  <!-- Global Thin Scroll Progress Indicator -->
+  <div id="global-scroll-progress" class="global-scroll-progress" aria-hidden="true"><div id="global-scroll-bar" class="global-scroll-bar"></div></div>
 
   <!-- Ambient Film Grain Overlay -->
   <div class="ambient-grain" aria-hidden="true"></div>
@@ -85,6 +132,13 @@
     </ul>
 
     <div class="nav-dock-actions">
+      <!-- Command Palette Quick Launcher (Ctrl+K / Cmd+K) -->
+      <button id="cmd-palette-btn" class="nav-ctrl-btn nav-cmd-btn" title="Open Command Palette (Ctrl+K or ⌘K)" aria-label="Open Command Palette">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+        </svg>
+        <span class="cmd-kbd-badge">⌘K</span>
+      </button>
       <!-- Quick Resume Action for HR & Recruiters -->
       <button id="nav-resume-btn" class="nav-resume-btn" title="View / Download Resume (CV)" aria-label="View Resume">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -215,7 +269,8 @@
 
           <div class="editorial-portrait-card" id="photo-card-primary" data-tilt data-tilt-max="5">
             <div class="editorial-portrait-frame">
-              <img src="./assets/user-portrait-2.png" alt="Saumya Pandya" class="editorial-portrait-img" />
+              <img src="./assets/user-portrait-clean.png" alt="Saumya Pandya — Full-Stack Developer &amp; CSE Student at VIT Chennai" class="editorial-portrait-img" onerror="this.src='./assets/user-portrait-2.png';" />
+              <div class="editorial-portrait-ring"></div>
               <div class="editorial-portrait-shine"></div>
             </div>
 
@@ -585,8 +640,13 @@
 
       <!-- Footer -->
       <footer class="spatial-footer">
-        <div>© <span id="footer-year">2026</span> Saumya Pandya. All rights reserved.</div>
-        <div class="footer-credits">Crafted with <span>Clean Software Architecture</span> &amp; Zero Bloat.</div>
+        <div class="footer-top-row">
+          <div>© <span id="footer-year">2026</span> Saumya Pandya. All rights reserved.</div>
+          <div class="footer-update-badge">Last updated: November 2026</div>
+        </div>
+        <div class="footer-credits">
+          <span>Pure Vanilla JS</span> • <span>Vite</span> • <span>CSS Design Tokens</span> • <span>HTML5 Spatial Canvas</span>
+        </div>
       </footer>
     </section>
 

@@ -9,6 +9,7 @@ import { profileData } from '../data/profile.js';
 import { renderProjectCard } from './project-card.js';
 import { TiltParallaxEngine } from './tilt-parallax.js';
 import { SpatialCanvasEngine } from './spatial-canvas.js';
+import { CommandPalette } from './command-palette.js';
 
 class ProjectsPageController {
   constructor() {
@@ -45,6 +46,9 @@ class ProjectsPageController {
     this.setupCaseStudyModal();
     this.setupResumeModal();
     this.setupBackToTop();
+    this.setupScrollProgressBar();
+    this.setupCardGlowEffect();
+    this.commandPalette = new CommandPalette();
 
     // 7. Initial Filter & Render
     this.applyViewMode(this.viewMode, false);
@@ -630,6 +634,34 @@ class ProjectsPageController {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
     });
+  }
+
+  setupScrollProgressBar() {
+    const bar = document.getElementById('global-scroll-bar');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll <= 0) return;
+      const progress = Math.min(Math.max(window.scrollY / totalScroll, 0), 1);
+      bar.style.width = `${progress * 100}%`;
+    }, { passive: true });
+  }
+
+  setupCardGlowEffect() {
+    const attachGlow = () => {
+      const cards = document.querySelectorAll('.project-card-3d, .project-card-row');
+      cards.forEach(card => {
+        card.addEventListener('pointermove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    };
+    attachGlow();
   }
 }
 
